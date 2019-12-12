@@ -1,12 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import firebaseApp from './components/Firebase/firebaseUtils';
+// import logo from './logo.svg';
+// import './App.css';
 
 function App() {
+  firebaseApp.collection('menu').get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        console.log(doc.id, " => ", doc.data());
+      });
+    });
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -24,3 +30,8 @@ function App() {
 }
 
 export default App;
+
+// linha 9 {/* <img src={logo} className="App-logo" alt="logo" /> */} 
+//as rotas vão ser criadas aqui
+
+//pasta pages onde vão ficar o app.js (garçom) e cozinha
