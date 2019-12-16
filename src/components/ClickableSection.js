@@ -6,11 +6,10 @@ const ClickableSection = (props) => {
   return (
     <div onClick={props.onClick}>
       <p>{props.name}</p>
-      <p>{props.price}</p>
+      <p>R$ {props.price}</p>
+      {props.id}
     </div>
   );
 }
 
 export default ClickableSection;
-
-//adicionar depois onclick
