@@ -1,37 +1,18 @@
 import React from 'react';
-import firebaseApp from './components/Firebase/firebaseUtils';
-// import logo from './logo.svg';
-// import './App.css';
+import Lounge from './pages/Lounge';
+import Kitchen from './pages/Kitchen';
 
-function App() {
-  firebaseApp.collection('menu').get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        console.log(doc.id, " => ", doc.data());
-      });
-    });
+//fazer rota e instalar o router
+
+const App = () => {
+  if (window.location.pathname === '/kitchen') {
+    return (
+      <Kitchen />
+    );
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Lounge />
   );
-}
+};
 
 export default App;
-
-// linha 9 {/* <img src={logo} className="App-logo" alt="logo" /> */} 
-//as rotas vão ser criadas aqui
-
-//pasta pages onde vão ficar o app.js (garçom) e cozinha
