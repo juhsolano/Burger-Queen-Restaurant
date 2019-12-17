@@ -3,6 +3,14 @@ import firebaseApp from '../components/Firebase/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  mudarNome: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  }
+});
 
 function Lounge() {
   const [breakfastMenu, setBreakfastMenu] = useState([]);
@@ -10,7 +18,6 @@ function Lounge() {
   const [order, setOrder] = useState([]);
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
-  // const [total, setTotal] = useState('');
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -41,20 +48,25 @@ function Lounge() {
   }
   console.log(order);
 
+  //criar a minha funcao submitOrder
+
+
   return (
     <div>
-      <section>
+      <div>
         <Input type='text' value={client} placeholder='Nome cliente' handleChange={event => setClient(event.currentTarget.value)} />
         <Input type='number' value={table} placeholder='Nº de Mesa' handleChange={event => setTable(event.currentTarget.value)} />
-      </section>
-      <OptionsCard
-        breakfastMenu={breakfastMenu}
-        lunchMenu={lunchMenu}
-        selectOptions={selectOptions}
-      />
-      <OrderCard
-        order={order}
-      />
+      </div>
+      <div className={css(styles.mudarNome)}>
+        <OptionsCard
+          breakfastMenu={breakfastMenu}
+          lunchMenu={lunchMenu}
+          selectOptions={selectOptions}
+        />
+        <OrderCard
+          order={order}
+        />
+      </div>
     </div>
   );
 }
