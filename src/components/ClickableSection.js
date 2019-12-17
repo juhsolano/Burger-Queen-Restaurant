@@ -3,7 +3,7 @@ import React from 'react';
 
 const ClickableSection = (props) => {
   return (
-    <div onClick={props.onClick}>
+    <div onClick={props.handleClick}>
       <p>{props.name}</p>
       <p>R$ {props.price},00</p>
       {props.id}

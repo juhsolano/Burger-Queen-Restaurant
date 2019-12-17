@@ -1,91 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import firebaseApp from '../components/Firebase/firebaseUtils';
-// import Button from '../components/Button'
-import ClickableSection from '../components/ClickableSection';
+import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
-// import OrderCard from '../components/OrderCard';
+import OrderCard from '../components/OrderCard';
 
 function Lounge() {
-  // const [counter, setCounter] = useState(0);
   const [breakfastMenu, setBreakfastMenu] = useState([]);
   const [lunchMenu, setLunchMenu] = useState([]);
-  // const [client, setClient] = useState('');
-  // const [table, setTable] = useState('');
-  // const [order, setOrder] = useState([]);
+  const [order, setOrder] = useState([]);
+  const [client, setClient] = useState('');
+  const [table, setTable] = useState('');
   // const [total, setTotal] = useState('');
 
   useEffect(() => {
     firebaseApp.collection('menu')
-      .where('breakfast', '==', true)
-      .onSnapshot((snapshot) => {
-        const food = snapshot.docs.map((doc) => ({
+      .get()
+      .then((snapshot) => {
+        const breakfastFood = snapshot.docs.filter(docs => docs.data().breakfast).map((doc) => ({
           id: doc.id,
           ...doc.data()
         }))
-        setBreakfastMenu(food);
-      })
-  }, [])
+        setBreakfastMenu(breakfastFood);
 
-  useEffect(() => {
-    firebaseApp.collection('menu')
-      .where('lunch', '==', true)
-      .onSnapshot((snapshot) => {
-        const food = snapshot.docs.map((doc) => ({
+        const lunchFood = snapshot.docs.filter(doc => doc.data().lunch).map((doc) => ({
           id: doc.id,
           ...doc.data()
         }))
-        setLunchMenu(food);
+        setLunchMenu(lunchFood);
       })
   }, [])
 
-  // const submitOrder = (event) => {
-  //         event.preventDefault();
-  //         firebaseApp
-  //             .collection('order')
-  //             .add({
-  //                 client,
-  //                 table,
-  //                 //order,
-  //                 //total,
-  //             })
-  //             .then(() => {
-  //                 setClient('')
-  //                 setTable('')
-  //                 //setOrder([])
-  //                 //setTotal('')
-  //             });
-  //     }
+  const selectOptions = (item) => {
+    if (!order.includes(item)) {
+      item.count = 1;
+      setOrder([...order, item])
+    } else {
+      item.count += 1;
+      setOrder([...order])
+    }
+  }
+  console.log(order);
 
   return (
-    <OptionsCard
-      breakfastMenu={breakfastMenu}
-      lunchMenu={lunchMenu} />
+    <div>
+      <section>
+        <Input type='text' value={client} placeholder='Nome cliente' handleChange={event => setClient(event.currentTarget.value)} />
+        <Input type='number' value={table} placeholder='Nº de Mesa' handleChange={event => setTable(event.currentTarget.value)} />
+      </section>
+      <OptionsCard
+        breakfastMenu={breakfastMenu}
+        lunchMenu={lunchMenu}
+        selectOptions={selectOptions}
+      />
+      <OrderCard
+        order={order}
+      />
+    </div>
   );
 }
 
 export default Lounge;
-
-
-
-//RETURNO
-// return (
-//   <div>
-//     <p>CAFÉ DA MANHÃ</p>
-//     {breakfastMenu.map((item) => <ClickableSection onClick={() => getItem(item)} name={item.name} price={item.price} key={item.id} />)}
-//     <p>ALMOÇO</p>
-//     {lunchMenu.map((item) => <ClickableSection onClick={() => getItem(item)} name={item.name} price={item.price} key={item.id} />)}
-//     <p>{counter}</p>
-//     <Button onClick={() => setCounter(counter + 1)}
-//       title="Contador" />
-//   </div>
-// );
-
-// useEffect(() => {
-//   firebaseApp.collection('menu').get()
-//     .then(function (querySnapshot) {
-//       querySnapshot.forEach(function (doc) {
-//         setMenu((currentState) => [...currentState, doc.data()]);
-//       });
-//     });
-// }, []) //array vazio para nao entrar em looping e ser executado apenas uma vez
-// console.log(menu);
