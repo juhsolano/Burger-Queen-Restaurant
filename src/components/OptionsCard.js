@@ -3,7 +3,7 @@ import ClickableSection from '../components/ClickableSection';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
-  teste: {
+  standardStyle: {
     width: '50vw'
   }
 });
@@ -13,7 +13,7 @@ const OptionsCard = (props) => {
   const lunchMenu = props.lunchMenu;
 
   return (
-    <div className={css(styles.teste)}>
+    <div className={css(styles.standardStyle)}>
       <section>
         <h4>Café da Manhã</h4>
         {breakfastMenu.map((item) => <ClickableSection handleClick={() => { props.selectOptions(item) }}

@@ -6,7 +6,7 @@ import OrderCard from '../components/OrderCard';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
-  mudarNome: {
+  loungeStandard: {
     display: 'flex',
     justifyContent: 'space-around',
   }
@@ -48,8 +48,7 @@ function Lounge() {
   }
   console.log(order);
 
-  //criar a minha funcao submitOrder
-
+  //Função para deletar item
 
   return (
     <div>
@@ -57,7 +56,7 @@ function Lounge() {
         <Input type='text' value={client} placeholder='Nome cliente' handleChange={event => setClient(event.currentTarget.value)} />
         <Input type='number' value={table} placeholder='Nº de Mesa' handleChange={event => setTable(event.currentTarget.value)} />
       </div>
-      <div className={css(styles.mudarNome)}>
+      <div className={css(styles.loungeStandard)}>
         <OptionsCard
           breakfastMenu={breakfastMenu}
           lunchMenu={lunchMenu}
@@ -72,3 +71,10 @@ function Lounge() {
 }
 
 export default Lounge;
+
+//TO DO LIST
+//Função para subtrair (até 1, caso contrário é excluido)
+//Função de soma do total
+//Arrumar styles da primeira tela
+//Função submitOrder
+
