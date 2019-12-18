@@ -42,6 +42,9 @@ const OrderCard = (props) => {
 
 export default OrderCard;
 
+
+// handleClick={() => { props.removeOrder(element) }}
 //Ao final da section adicionar o button de submitOrder
+// handleClick{() => { props.removeOrder(element) }}
 
 {/* <Button handleClick{() => submitOrder} title='Enviar Pedido' /> */ }

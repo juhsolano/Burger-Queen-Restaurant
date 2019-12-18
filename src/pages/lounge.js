@@ -50,6 +50,22 @@ function Lounge() {
 
   //Função para deletar item
 
+  // const removeOrder = (item) => {
+  //   const idItem = (setOrder.indexOf(item));
+  //   console.log(idItem);
+  // }
+  // const remove = (item) => {
+  //   const index = (orderState.indexOf(item));
+  //   orderState.splice(index, 1);
+  //   setOrder([...orderState]);
+  // };
+
+  // delete (id){
+  //   this.setState(prevState => ({
+  //     data: prevState.data.filter(el => el != id)
+  //   }));
+  // }
+
   return (
     <div>
       <div>
@@ -71,6 +87,10 @@ function Lounge() {
 }
 
 export default Lounge;
+
+
+// removeOrder={removeOrder}
+
 
 //TO DO LIST
 //Função para subtrair (até 1, caso contrário é excluido)
