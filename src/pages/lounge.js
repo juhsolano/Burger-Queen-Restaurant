@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import firebaseApp from '../components/Firebase/firebaseUtils';
+import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   }
 });
 
-function Lounge() {
+const Lounge = () => {
   const [breakfastMenu, setBreakfastMenu] = useState([]);
   const [lunchMenu, setLunchMenu] = useState([]);
   const [order, setOrder] = useState([]);
