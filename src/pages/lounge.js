@@ -46,25 +46,22 @@ const Lounge = () => {
       setOrder([...order])
     }
   }
-  console.log(order);
 
-  //Função para deletar item
+  const reduceItem = (item) => {
+    if (order.includes(item)) {
+      item.count -= 1;
+    }
+    const teste = order.filter(element => element.count > 0)
+    setOrder([...teste])
+  }
 
-  // const removeOrder = (item) => {
-  //   const idItem = (setOrder.indexOf(item));
-  //   console.log(idItem);
-  // }
-  // const remove = (item) => {
-  //   const index = (orderState.indexOf(item));
-  //   orderState.splice(index, 1);
-  //   setOrder([...orderState]);
-  // };
+  const removeOrder = (item) => {
+    const deleteItem = (order.indexOf(item));
+    order.splice(deleteItem, 1);
+    setOrder([...order]);
+  }
 
-  // delete (id){
-  //   this.setState(prevState => ({
-  //     data: prevState.data.filter(el => el != id)
-  //   }));
-  // }
+  const total = order.reduce((acc, item) => acc + (item.count * item.price), 0)
 
   return (
     <div>
@@ -80,6 +77,9 @@ const Lounge = () => {
         />
         <OrderCard
           order={order}
+          removeOrder={removeOrder}
+          reduceItem={reduceItem}
+          total={total}
         />
       </div>
     </div>
@@ -87,14 +87,3 @@ const Lounge = () => {
 }
 
 export default Lounge;
-
-
-// removeOrder={removeOrder}
-
-
-//TO DO LIST
-//Função para subtrair (até 1, caso contrário é excluido)
-//Função de soma do total
-//Arrumar styles da primeira tela
-//Função submitOrder
-

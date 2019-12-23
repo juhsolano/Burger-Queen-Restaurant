@@ -4,11 +4,18 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
   optionsStyle: {
     display: 'flex',
-    // justifyContent: 'space-around',
+    flexDirection:'column',
+    // flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
     fontSize: '14px',
     backgroundColor: '#e67e22',
     borderColor: '#000000',
-    borderBottomStyle: 'double',
+    borderStyle: 'groove',
+    borderRadius:'5px',
+    width: '20vw',
+    height: '5vw',
+    margin: '1.5px',
+    // flowGrow:'2',
   },
 });
 
