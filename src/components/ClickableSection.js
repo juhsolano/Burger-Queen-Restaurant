@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
   optionsStyle: {
     display: 'flex',
     flexDirection:'column',
-    // flexWrap: 'wrap',
     justifyContent: 'space-evenly',
     fontSize: '14px',
     backgroundColor: '#e67e22',
@@ -15,7 +14,6 @@ const styles = StyleSheet.create({
     width: '20vw',
     height: '5vw',
     margin: '1.5px',
-    // flowGrow:'2',
   },
 });
 

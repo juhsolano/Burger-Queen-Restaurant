@@ -11,17 +11,23 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: '2px',
     borderRadius: '5px',
-    borderColor: '#ecf0f1',
+    borderColor: '#95a5a6',
     color: '#ecf0f1'
   },
   menuStyle: {
-    display:'flex',
+    display: 'flex',
     margin: '15px',
     padding: '4px',
     flexWrap: 'wrap',
-    flexFlow:'row-wrap',
+    flexFlow: 'row-wrap',
     justifyContent: 'space-around',
-    backgroundColor: '#95a5a6',
+  },
+  titleStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 
@@ -32,7 +38,7 @@ const OptionsCard = (props) => {
   return (
     <div className={css(styles.standardStyle)}>
       <section className={css(styles.menuStyle)}>
-        <h4>Café da Manhã</h4>
+        <h4 className={css(styles.titleStyle)}>Café da Manhã</h4>
         {breakfastMenu.map((item) => <ClickableSection handleClick={(e) => {
           e.preventDefault();
           props.selectOptions(item)

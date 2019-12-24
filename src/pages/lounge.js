@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 });
 
 const Lounge = () => {
+
   const [breakfastMenu, setBreakfastMenu] = useState([]);
   const [lunchMenu, setLunchMenu] = useState([]);
   const [order, setOrder] = useState([]);
@@ -37,6 +38,25 @@ const Lounge = () => {
       })
   }, [])
 
+  const submitOrder = () => {
+    if (client && table) {
+      firebaseApp.collection('order')
+        .add({
+          clientName: client,
+          table: table,
+          clientOrder: order,
+          bill: total,
+        })
+        .then(() => {
+          setClient(['']);
+          setTable(['']);
+          setOrder([]);
+        })
+    }
+    console.log('Enviou!')
+  }
+
+
   const selectOptions = (item) => {
     if (!order.includes(item)) {
       item.count = 1;
@@ -51,8 +71,8 @@ const Lounge = () => {
     if (order.includes(item)) {
       item.count -= 1;
     }
-    const teste = order.filter(element => element.count > 0)
-    setOrder([...teste])
+    const minus = order.filter(element => element.count > 0)
+    setOrder([...minus])
   }
 
   const removeOrder = (item) => {
@@ -80,6 +100,7 @@ const Lounge = () => {
           removeOrder={removeOrder}
           reduceItem={reduceItem}
           total={total}
+          submitOrder={submitOrder}
         />
       </div>
     </div>
