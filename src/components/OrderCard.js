@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     width: '5vw',
     height: '5vw'
   },
+  orderButton: {
+    backgroundColor: '#2ecc71',
+  },
   totalStyle: {
     borderTopStyle: 'solid',
     borderWidth: '0.5px',
@@ -79,14 +82,15 @@ const OrderCard = (props) => {
         <div className={css(styles.totalStyle)}>
           <p>Total = R${props.total},00</p>
         </div>
-        <Button handleClick={(e) => {
-          e.preventDefault();
-          props.submitOrder();
-        }}
+        <Button className={css(styles.orderButton)}
+          handleClick={(e) => {
+            e.preventDefault();
+            props.submitOrder();
+          }}
           title='ENVIAR PEDIDO' />
       </section>
     </div>
   );
-}
+};
 
 export default OrderCard;
