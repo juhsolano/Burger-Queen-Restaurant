@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import firebaseApp from '../components/Firebase/firebaseUtils';
+import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
-  mudarNome: {
+  loungeStandard: {
     display: 'flex',
     justifyContent: 'space-around',
   }
 });
 
-function Lounge() {
+const Lounge = () => {
+
   const [breakfastMenu, setBreakfastMenu] = useState([]);
   const [lunchMenu, setLunchMenu] = useState([]);
   const [order, setOrder] = useState([]);
@@ -37,6 +38,25 @@ function Lounge() {
       })
   }, [])
 
+  const submitOrder = () => {
+    if (client && table) {
+      firebaseApp.collection('order')
+        .add({
+          clientName: client,
+          table: table,
+          clientOrder: order,
+          bill: total,
+        })
+        .then(() => {
+          setClient(['']);
+          setTable(['']);
+          setOrder([]);
+        })
+    }
+    console.log('Enviou!')
+  }
+
+
   const selectOptions = (item) => {
     if (!order.includes(item)) {
       item.count = 1;
@@ -46,10 +66,22 @@ function Lounge() {
       setOrder([...order])
     }
   }
-  console.log(order);
 
-  //criar a minha funcao submitOrder
+  const reduceItem = (item) => {
+    if (order.includes(item)) {
+      item.count -= 1;
+    }
+    const minus = order.filter(element => element.count > 0)
+    setOrder([...minus])
+  }
 
+  const removeOrder = (item) => {
+    const deleteItem = (order.indexOf(item));
+    order.splice(deleteItem, 1);
+    setOrder([...order]);
+  }
+
+  const total = order.reduce((acc, item) => acc + (item.count * item.price), 0)
 
   return (
     <div>
@@ -57,7 +89,7 @@ function Lounge() {
         <Input type='text' value={client} placeholder='Nome cliente' handleChange={event => setClient(event.currentTarget.value)} />
         <Input type='number' value={table} placeholder='Nº de Mesa' handleChange={event => setTable(event.currentTarget.value)} />
       </div>
-      <div className={css(styles.mudarNome)}>
+      <div className={css(styles.loungeStandard)}>
         <OptionsCard
           breakfastMenu={breakfastMenu}
           lunchMenu={lunchMenu}
@@ -65,6 +97,10 @@ function Lounge() {
         />
         <OrderCard
           order={order}
+          removeOrder={removeOrder}
+          reduceItem={reduceItem}
+          total={total}
+          submitOrder={submitOrder}
         />
       </div>
     </div>

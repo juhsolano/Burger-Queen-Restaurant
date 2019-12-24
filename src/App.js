@@ -1,18 +1,24 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 import Lounge from './pages/Lounge';
 import Kitchen from './pages/Kitchen';
-
-//fazer rota e instalar o router
+import Nav from './components/Nav';
 
 const App = () => {
-  if (window.location.pathname === '/kitchen') {
     return (
-      <Kitchen />
-    );
-  }
-  return (
-    <Lounge />
-  );
+        <Router>
+            <div>
+                <Nav />
+                <Switch>
+                    <Route exact path="/lounge" component={Lounge} />
+                    <Route path="/kitchen" component={Kitchen} />
+                </Switch>
+            </div>
+        </Router>);
 };
 
 export default App;
