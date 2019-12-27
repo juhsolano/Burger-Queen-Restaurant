@@ -124,9 +124,9 @@ export default function ConfirmationOption() {
     return (
         <div className={classes.root}>
             <List component='div' role='list'>
-                {/* <ListItem button divder disabled role='listitem'>
+                <ListItem button divder disabled role='listitem'>
                     <ListItemText primary='Opções e Extras' />
-                </ListItem> */}
+                </ListItem>
                 <ListItem
                     button
                     divider
@@ -138,9 +138,9 @@ export default function ConfirmationOption() {
                 >
                     <ListItemText primary='Opções Hambúrguer' secondary={value} />
                 </ListItem>
-                {/* <ListItem button divider disabled role='listitem'>
+                <ListItem button divider disabled role='listitem'>
                     <ListItemText primary='Extras' secondary={value} />
-                </ListItem> */}
+                </ListItem>
                 <HamburguerOptions
                     classes={{
                         paper: classes.paper,
@@ -155,13 +155,3 @@ export default function ConfirmationOption() {
         </div>
     );
 }
-
-// import React from 'react';
-
-// const Kitchen = () => {
-//     return (
-//         <p>JUANITA ESTÁ NA COZINHA FAZENDO!</p>
-//     );
-// };
-
-// export default Kitchen;
