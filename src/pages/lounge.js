@@ -46,6 +46,7 @@ const Lounge = () => {
           table: table,
           clientOrder: order,
           bill: total,
+          status: 'Pendente',
         })
         .then(() => {
           setClient(['']);
@@ -65,6 +66,9 @@ const Lounge = () => {
       item.count += 1;
       setOrder([...order])
     }
+    console.log(item);
+    console.log(item.options);
+    console.log(item.extra[0].price);
   }
 
   const reduceItem = (item) => {
