@@ -3,7 +3,7 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-// import HamburguerOptions from '../components/HamburguerOptions';
+// import ConfirmationOption from '../components/ConfirmationOption';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
@@ -59,11 +59,12 @@ const Lounge = () => {
   }
 
   const selectOptions = (item) => {
-    if (item.options.length !== 0) {
-      console.log(item.options)
-      // HamburguerOptions(item.options);
-      setOrder([...order, item.options])
-    } else if (!order.includes(item)) {
+    // if (item.options.length !== 0) {
+    //   console.log(item.options)
+    //   ConfirmationOption(item.options);
+    //   setOrder([...order, item.options])
+    // } else 
+    if (!order.includes(item)) {
       item.count = 1;
       setOrder([...order, item])
     } else {
@@ -71,17 +72,6 @@ const Lounge = () => {
       setOrder([...order])
     }
   }
-
-  // if (!order.includes(item)) {
-  //   item.count = 1;
-  //   setOrder([...order, item])
-  // } else {
-  //   item.count += 1;
-  //   setOrder([...order])
-  // }
-  // console.log(item);
-  // console.log(item.options);
-  // console.log(item.extra[0].price);
 
   const reduceItem = (item) => {
     if (order.includes(item)) {

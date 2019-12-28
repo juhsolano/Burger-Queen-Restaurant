@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -13,29 +13,12 @@ import Dialog from '@material-ui/core/Dialog';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useEffect } from 'react';
 
 // const options = [
 //   'carne bovina',
 //   'frango',
 //   'vegetariano',
 // ];
-
-// const options = (props) => {
-//   const lunchMenu = props.lunchMenu;
-//   return (
-//     <div>
-//       {lunchMenu.map((item) => <ClickableSection handleClick={(e) => {
-//         e.preventDefault();
-//         props.selectOptions(item)
-//       }}
-//         name={item.options}
-//         key={item.id}
-//       />)
-//       }
-//     </div>
-//   )
-// }
 
 const HamburguerOptions = (props) => {
   const { onClose, value: valueProp, open, ...other } = props;
@@ -103,72 +86,69 @@ const HamburguerOptions = (props) => {
   );
 }
 
-export default HamburguerOptions;
+HamburguerOptions.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
-
-// HamburguerOptions.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-//   open: PropTypes.bool.isRequired,
-//   value: PropTypes.string.isRequired,
-// };
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     width: '100%',
-//     maxWidth: 360,
-//     backgroundColor: theme.pallete.background.paper,
-//   },
-//   paper: {
-//     width: '80%',
-//     maxHeight: 435,
-//   },
-// }));
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.pallete.background.paper,
+  },
+  paper: {
+    width: '80%',
+    maxHeight: 435,
+  },
+}));
 
 
 
-// const ConfirmationOption = () => {
-//   const classes = useStyles;
-//   const [open, setOpen] = useState(false);
-//   const [value, setValue] = useState('');
+const ConfirmationOption = () => {
+  const classes = useStyles;
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
 
-//   const handleClickListItem = () => {
-//     setOpen(true);
-//   };
+  const handleClickListItem = () => {
+    setOpen(true);
+  };
 
-//   const handleClose = newValue => {
-//     setOpen(false);
-//     if (newValue) {
-//       setValue(newValue);
-//     }
-//   };
+  const handleClose = newValue => {
+    setOpen(false);
+    if (newValue) {
+      setValue(newValue);
+    }
+  };
 
-//   return (
-//     <div className={classes.root}>
-//       <List component='div' role='list'>
-//         <ListItem
-//           button
-//           divider
-//           aria-haspopup='true'
-//           aria-controls='burger-options'
-//           aria-label='hamburguer options'
-//           onClick={handleClickListItem}
-//           role='listitem'
-//         >
-//           <ListItemText primary='Opções Hambúrguer' secondary={value} />
-//         </ListItem>
-//         <HamburguerOptions
-//           classes={{
-//             paper: classes.paper,
-//           }}
-//           id='burger-options'
-//           keepMounted
-//           open={open}
-//           onClose={handleClose}
-//           value={value}
-//         />
-//       </List>
-//     </div>
-//   );
-// }
+  return (
+    <div className={classes.root}>
+      <List component='div' role='list'>
+        <ListItem
+          button
+          divider
+          aria-haspopup='true'
+          aria-controls='burger-options'
+          aria-label='hamburguer options'
+          onClick={handleClickListItem}
+          role='listitem'
+        >
+          <ListItemText primary='Opções Hambúrguer' secondary={value} />
+        </ListItem>
+        <HamburguerOptions
+          classes={{
+            paper: classes.paper,
+          }}
+          id='burger-options'
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          value={value}
+        />
+      </List>
+    </div>
+  );
+}
 
-// export default ConfirmationOption;
+export default ConfirmationOption;
