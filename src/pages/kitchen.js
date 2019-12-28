@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Kitchen = () => {
-    return (
-        <p>COZINHANDO MINHA CABECINHA!</p>
-    );
+  return (
+    <p>JUANITA ESTÁ NA COZINHA PREPARANDO UM CÓDIGO!</p>
+  );
 };
 
 export default Kitchen;
