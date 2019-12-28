@@ -3,7 +3,7 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-import HamburguerOptions from '../components/HamburguerOptions';
+// import HamburguerOptions from '../components/HamburguerOptions';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
