@@ -9,77 +9,66 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-//Deixei como props e passo na página em que é chamado
-// const options = [
-//     'carne bovina',
-//     'frango',
-//     'vegetariano',
-// ];
-
 const AdditionalOptions = (props) => {
-    const { onClose, value: valueProp, open, ...other } = props;
-    const [value, setValue] = useState(valueProp);
-    const radioGroupRef = useRef(null);
+  const { onClose, value: valueProp, open, ...other } = props;
+  const [value, setValue] = useState(valueProp);
+  const radioGroupRef = useRef(null);
 
-    useEffect(() => {
-        if (!open) {
-            setValue(valueProp);
-        }
-    }, [valueProp, open]);
-
-    const handleEntering = () => {
-        if (radioGroupRef.current != null) {
-            radioGroupRef.current.focus();
-        }
-    };
-
-    const handleCancel = () => {
-        onClose();
-    };
-
-    const handleOk = () => {
-        onClose(value);
+  useEffect(() => {
+    if (!open) {
+      setValue(valueProp);
     }
+  }, [valueProp, open]);
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        setValue(e.target.value);
-    };
+  const handleEntering = () => {
+    if (radioGroupRef.current != null) {
+      radioGroupRef.current.focus();
+    }
+  };
 
-    return (
-        <Dialog
-            disableBackdropClick
-            disableEscapeKeyDown
-            maxWidth='xs'
-            onEntering={handleEntering}
-            aria-labelledby='confirmation-dialog-title'
-            open={open}
-            {...other}
+  const handleCancel = () => {
+    onClose();
+  };
+
+  const handleOk = () => {
+    onClose(value);
+  }
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
+
+  return (
+    <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      maxWidth='xs'
+      onEntering={handleEntering}
+      aria-labelledby='confirmation-dialog-title'
+      open={open}
+      {...other}
+    >
+      <DialogTitle id='confirmation-dialog-title'>Opções Hambúrguer</DialogTitle>
+      <DialogContent dividers>
+        <RadioGroup
+          ref={radioGroupRef}
+          aria-label='burger'
+          name='burger'
+          value={value}
+          onChange={handleChange}
         >
-            <DialogTitle id='confirmation-dialog-title'>Opções Hambúrguer</DialogTitle>
-            <DialogContent dividers>
-                <RadioGroup
-                    ref={radioGroupRef}
-                    aria-label='burger'
-                    name='burger'
-                    value={value}
-                    onChange={handleChange}
-                >
-                    {props.options.map(option => (
-                        <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
-                    ))}
-                </RadioGroup>
-            </DialogContent>
-            <DialogActions>
-                <Button autoFocus onClick={handleCancel} color='primary'>
-                    Cancel
-                </Button>
-                <Button onClick={handleOk} color='primary'>
-                    Ok
-                </Button>
-            </DialogActions>
-        </Dialog>
-    );
+          {props.options.map(option => (
+            <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
+          ))}
+        </RadioGroup>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCancel} color='primary'>Cancel</Button>
+        <Button onClick={handleOk} color='primary'>Ok</Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
 
 export default AdditionalOptions;
