@@ -31,6 +31,7 @@ const Lounge = () => {
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
+  const [teste, setTeste] = useState('');
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -49,17 +50,6 @@ const Lounge = () => {
         setLunchMenu(lunchFood);
       })
   }, [])
-
-  const handleClickListItem = () => {
-    setOpen(true);
-  }
-
-  const handleClose = newValue => {
-    setOpen(false);
-    if (newValue) {
-      setValue(newValue)
-    }
-  };
 
   const submitOrder = () => {
     if (order.length && client && table) {
@@ -80,8 +70,10 @@ const Lounge = () => {
         })
     } else if (!order.length) {
       alertify.error('Selecione ao menos um item');
-    } else {
-      alertify.error('Informe o nome do cliente e mesa')
+    } else if (!client) {
+      alertify.error('Informe o nome do cliente');
+    } else if (!table) {
+      alertify.error('Informe a mesa');
     }
   }
 
@@ -89,7 +81,8 @@ const Lounge = () => {
     if (item.options.length !== 0) {
       console.log(item.options)
       handleClickListItem(item.options);
-      setOrder([...order, item.options])
+      console.log(item.options, 'sou a function do contador')
+      // setOrder([...order, item.options])
     } else if (!order.includes(item)) {
       item.count = 1;
       setOrder([...order, item])
@@ -98,6 +91,21 @@ const Lounge = () => {
       setOrder([...order])
     }
   }
+
+  const handleClickListItem = (item) => {
+    setOrder([...order, { ...item }])
+    setTeste('')
+    setOpen(true);
+    console.log(item, "oi");
+  };
+
+  const handleClose = newValue => {
+    setOpen(false);
+    if (newValue === setOrder) {
+      setValue(newValue)
+    }
+    console.log(newValue, "tchau");
+  };
 
   const reduceItem = (item) => {
     if (order.includes(item)) {
@@ -135,17 +143,6 @@ const Lounge = () => {
           submitOrder={submitOrder}
         />
         <List component='div' role='list'>
-          <ListItem
-            button
-            divider
-            aria-haspopup='true'
-            aria-controls='burger-options'
-            aria-label='hamburguer options'
-            onClick={handleClickListItem}
-            role='listitem'
-          >
-            <ListItemText primary='Opções Hambúrguer' secondary={value} />
-          </ListItem>
           <AdditionalOptions
             options={options}
             id='burger-options'

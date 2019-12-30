@@ -64,7 +64,7 @@ const AdditionalOptions = (props) => {
         </RadioGroup>
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleCancel} color='primary'>Cancel</Button>
+        <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
         <Button onClick={handleOk} color='primary'>Ok</Button>
       </DialogActions>
     </Dialog>

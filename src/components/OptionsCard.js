@@ -1,7 +1,7 @@
 import React from 'react';
 import ClickableSection from '../components/ClickableSection';
 import { StyleSheet, css } from 'aphrodite';
-import ConfirmationOption from '../components/ConfirmationOption';
+// import ConfirmationOption from '../components/ConfirmationOption';
 
 const styles = StyleSheet.create({
   standardStyle: {
@@ -55,7 +55,7 @@ const OptionsCard = (props) => {
         }}
           name={item.name} price={item.price}
           key={item.id} />)}
-        {ConfirmationOption}
+        {/* {ConfirmationOption} */}
       </section>
     </div>
   )
