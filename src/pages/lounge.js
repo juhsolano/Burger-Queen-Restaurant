@@ -9,12 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText'; import { StyleSheet, 
 import AdditionalOptions from '../components/AdditionalOptions';
 import alertify from 'alertifyjs';
 
-const options = [
-  'carne bovina',
-  'frango',
-  'vegetariano',
-];
-
 const styles = StyleSheet.create({
   loungeStandard: {
     display: 'flex',
@@ -30,8 +24,8 @@ const Lounge = () => {
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const [teste, setTeste] = useState('');
+  const [value, setValue] = useState({ options: '' });
+  // const [opcaoEscolhida, setOpcaoEscolhida] = useState({});
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -51,6 +45,8 @@ const Lounge = () => {
       })
   }, [])
 
+  // useEffect(() => console.log(value, 'agora apareci'), [])
+
   const submitOrder = () => {
     if (order.length && client && table) {
       firebaseApp.collection('order')
@@ -59,8 +55,8 @@ const Lounge = () => {
           table: table,
           clientOrder: order,
           bill: total,
-          dispatchTime: new Date().toLocaleString('pt-BR'),
-          status: 'Pendente',
+          _: new Date().toLocaleString('pt-BR'),
+          status: 'Encaminhado',
         })
         .then(() => {
           alertify.success('Pedido encaminhado com sucesso!');
@@ -73,15 +69,13 @@ const Lounge = () => {
     } else if (!client) {
       alertify.error('Informe o nome do cliente');
     } else if (!table) {
-      alertify.error('Informe a mesa');
+      alertify.error('Informe o nº da mesa');
     }
   }
 
   const selectOptions = (item) => {
     if (item.options.length !== 0) {
-      console.log(item.options)
       handleClickListItem(item.options);
-      console.log(item.options, 'sou a function do contador')
       // setOrder([...order, item.options])
     } else if (!order.includes(item)) {
       item.count = 1;
@@ -93,19 +87,22 @@ const Lounge = () => {
   }
 
   const handleClickListItem = (item) => {
-    setOrder([...order, { ...item }])
-    setTeste('')
+    // setOrder([...order, { ...item }])
     setOpen(true);
-    console.log(item, "oi");
+    console.log(item, "venho do array");
   };
 
   const handleClose = newValue => {
     setOpen(false);
     if (newValue === setOrder) {
-      setValue(newValue)
+      setValue({ options: newValue })
+      // setOpcaoEscolhida({ option: newValue })
     }
-    console.log(newValue, "tchau");
+    console.log(newValue, "FUI PEGO!");
+    console.log(value, 'ai caramba!');
+    // console.log(opcaoEscolhida, 'VAMOS!!!')
   };
+
 
   const reduceItem = (item) => {
     if (order.includes(item)) {
@@ -144,12 +141,12 @@ const Lounge = () => {
         />
         <List component='div' role='list'>
           <AdditionalOptions
-            options={options}
             id='burger-options'
             keepMounted
             open={open}
             onClose={handleClose}
             value={value}
+            lunchMenu={lunchMenu}
           />
         </List>
       </div>

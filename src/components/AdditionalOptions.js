@@ -13,6 +13,13 @@ const AdditionalOptions = (props) => {
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = useState(valueProp);
   const radioGroupRef = useRef(null);
+  const hamburguerOptions = props.lunchMenu.find(el => el.burger === true);
+
+  const options = [
+    'carne bovina',
+    'frango',
+    'vegetariano',
+  ];
 
   useEffect(() => {
     if (!open) {
@@ -34,9 +41,11 @@ const AdditionalOptions = (props) => {
     onClose(value);
   }
 
+  //quando seleciono um 
   const handleChange = (e) => {
     e.preventDefault();
     setValue(e.target.value);
+    console.log(value, 'quando seleciona opção apareço')
   };
 
   return (
@@ -58,7 +67,7 @@ const AdditionalOptions = (props) => {
           value={value}
           onChange={handleChange}
         >
-          {props.options.map(option => (
+          {options.map(option => (
             <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
           ))}
         </RadioGroup>
