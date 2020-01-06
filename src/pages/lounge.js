@@ -25,7 +25,7 @@ const Lounge = () => {
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState({ options: '' });
-  // const [opcaoEscolhida, setOpcaoEscolhida] = useState({});
+  const [paloma, setPaloma] = useState([]);
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -45,8 +45,6 @@ const Lounge = () => {
       })
   }, [])
 
-  // useEffect(() => console.log(value, 'agora apareci'), [])
-
   const submitOrder = () => {
     if (order.length && client && table) {
       firebaseApp.collection('order')
@@ -55,7 +53,7 @@ const Lounge = () => {
           table: table,
           clientOrder: order,
           bill: total,
-          _: new Date().toLocaleString('pt-BR'),
+          dispatchTime: new Date().toLocaleString('pt-BR'),
           status: 'Encaminhado',
         })
         .then(() => {
@@ -89,6 +87,7 @@ const Lounge = () => {
   const handleClickListItem = (item) => {
     // setOrder([...order, { ...item }])
     setOpen(true);
+    setPaloma(item);
     console.log(item, "venho do array");
   };
 
@@ -96,11 +95,9 @@ const Lounge = () => {
     setOpen(false);
     if (newValue === setOrder) {
       setValue({ options: newValue })
-      // setOpcaoEscolhida({ option: newValue })
     }
     console.log(newValue, "FUI PEGO!");
     console.log(value, 'ai caramba!');
-    // console.log(opcaoEscolhida, 'VAMOS!!!')
   };
 
 
@@ -146,7 +143,7 @@ const Lounge = () => {
             open={open}
             onClose={handleClose}
             value={value}
-            lunchMenu={lunchMenu}
+            lunchMenu={paloma}
           />
         </List>
       </div>
