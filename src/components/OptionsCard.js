@@ -1,7 +1,6 @@
 import React from 'react';
 import ClickableSection from '../components/ClickableSection';
 import { StyleSheet, css } from 'aphrodite';
-// import ConfirmationOption from '../components/ConfirmationOption';
 
 const styles = StyleSheet.create({
   standardStyle: {

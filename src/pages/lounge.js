@@ -25,7 +25,7 @@ const Lounge = () => {
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState({ options: '' });
-  const [paloma, setPaloma] = useState([]);
+  const [burgerOption, setBurgerOption] = useState([]);
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -74,7 +74,7 @@ const Lounge = () => {
   const selectOptions = (item) => {
     if (item.options.length !== 0) {
       handleClickListItem(item.options);
-      // setOrder([...order, item.options])
+      setOrder([...order, value])//aqui
     } else if (!order.includes(item)) {
       item.count = 1;
       setOrder([...order, item])
@@ -85,21 +85,18 @@ const Lounge = () => {
   }
 
   const handleClickListItem = (item) => {
-    // setOrder([...order, { ...item }])
     setOpen(true);
-    setPaloma(item);
-    console.log(item, "venho do array");
+    setBurgerOption(item);
   };
 
   const handleClose = newValue => {
     setOpen(false);
-    if (newValue === setOrder) {
+    if (newValue) {
       setValue({ options: newValue })
     }
-    console.log(newValue, "FUI PEGO!");
-    console.log(value, 'ai caramba!');
+    console.log(newValue, "Fui selecionado! (lounge)");
+    console.log(value, 'nada acontece feijoada!');
   };
-
 
   const reduceItem = (item) => {
     if (order.includes(item)) {
@@ -143,7 +140,7 @@ const Lounge = () => {
             open={open}
             onClose={handleClose}
             value={value}
-            lunchMenu={paloma}
+            burgerOption={burgerOption}
           />
         </List>
       </div>
@@ -152,3 +149,40 @@ const Lounge = () => {
 }
 
 export default Lounge;
+
+
+<List component="div" role="list">
+  <ListItem button divider disabled role="listitem">
+    <ListItemText primary="Interruptions" />
+  </ListItem>
+  <ListItem
+    button
+    divider
+    aria-haspopup="true"
+    aria-controls="ringtone-menu"
+    aria-label="phone ringtone"
+    onClick={handleClickListItem}
+    role="listitem"
+  >
+    <ListItemText primary="Phone ringtone" secondary={value} />
+  </ListItem>
+  <ListItem button divider disabled role="listitem">
+    <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+  </ListItem>
+  <ConfirmationDialogRaw
+    classes={{
+      paper: classes.paper,
+    }}
+    id="ringtone-menu"
+    keepMounted
+    open={open}
+    onClose={handleClose}
+    value={value}
+  />
+</List>
+
+
+
+
+
+

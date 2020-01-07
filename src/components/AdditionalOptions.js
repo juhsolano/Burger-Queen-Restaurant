@@ -36,12 +36,11 @@ const AdditionalOptions = (props) => {
     onClose(value);
   }
 
-  //quando seleciono um 
   const handleChange = (e) => {
     e.preventDefault();
     setValue(e.target.value);
-    console.log(e.target.value)
-    console.log(value, 'quando seleciona opção apareço')
+    console.log(e.target.value, 'apareço na seleção')
+    console.log(value, 'apareço se há change na seleção')
   };
 
   return (
@@ -63,7 +62,7 @@ const AdditionalOptions = (props) => {
           value={value}
           onChange={handleChange}
         >
-          {props.lunchMenu.map(option => (
+          {props.burgerOption.map(option => (
             <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
           ))}
         </RadioGroup>
