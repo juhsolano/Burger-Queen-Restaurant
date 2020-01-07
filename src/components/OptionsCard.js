@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   },
   menuStyle: {
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     margin: '15px',
     padding: '4px',
     flexWrap: 'wrap',
@@ -28,6 +30,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonOrganization: {
+    width: '22rem',
+    display: 'flex',
+    flexWrap: 'wrap',
   }
 });
 
@@ -39,23 +46,27 @@ const OptionsCard = (props) => {
     <div className={css(styles.standardStyle)}>
       <section className={css(styles.menuStyle)}>
         <h4 className={css(styles.titleStyle)}>Café da Manhã</h4>
-        {breakfastMenu.map((item) => <ClickableSection handleClick={(e) => {
-          e.preventDefault();
-          props.selectOptions(item)
-        }}
-          name={item.name} price={item.price}
-          key={item.id} />)}
+        <div className={css(styles.buttonOrganization)}>
+          {breakfastMenu.map((item) => <ClickableSection handleClick={(e) => {
+            e.preventDefault();
+            props.selectOptions(item)
+          }}
+            name={item.name} price={item.price}
+            key={item.id} />)}
+        </div>
       </section>
       <section className={css(styles.menuStyle)}>
-        <h4>Almoço e jantar</h4>
-        {lunchMenu.map((item) => <ClickableSection handleClick={(e) => {
-          e.preventDefault();
-          props.selectOptions(item)
-        }}
-          name={item.name} price={item.price}
-          key={item.id} />)}
+        <h4 className={css(styles.titleStyle)}>Almoço e jantar</h4>
+        <div className={css(styles.buttonOrganization)}>
+          {lunchMenu.map((item) => <ClickableSection handleClick={(e) => {
+            e.preventDefault();
+            props.selectOptions(item)
+          }}
+            name={item.name} price={item.price}
+            key={item.id} />)}
+        </div>
       </section>
-    </div>
+    </div >
   )
 };
 

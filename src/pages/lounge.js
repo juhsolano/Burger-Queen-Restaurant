@@ -3,8 +3,12 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-// import HamburguerOptions from '../components/HamburguerOptions';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
 import { StyleSheet, css } from 'aphrodite';
+import AdditionalOptions from '../components/AdditionalOptions';
+import alertify from 'alertifyjs';
 
 const styles = StyleSheet.create({
   loungeStandard: {
@@ -20,6 +24,10 @@ const Lounge = () => {
   const [order, setOrder] = useState([]);
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState({ options: '' });
+  const [burgerOption, setBurgerOption] = useState([]);
+  const [teste, setTeste] = useState({});
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -40,48 +48,64 @@ const Lounge = () => {
   }, [])
 
   const submitOrder = () => {
-    if (client && table) {
+    if (order.length && client && table) {
       firebaseApp.collection('order')
         .add({
           clientName: client,
           table: table,
           clientOrder: order,
           bill: total,
-          status: 'Pendente',
+          dispatchTime: new Date().toLocaleString('pt-BR'),
+          status: 'Encaminhado',
         })
         .then(() => {
+          alertify.success('Pedido encaminhado com sucesso!');
           setClient(['']);
           setTable(['']);
           setOrder([]);
         })
+    } else if (!order.length) {
+      alertify.error('Selecione ao menos um item');
+    } else if (!client) {
+      alertify.error('Informe o nome do cliente');
+    } else if (!table) {
+      alertify.error('Informe o nº da mesa');
     }
-    console.log('Enviou!')
-  }
+  };
 
-  const selectOptions = (item) => {
-    if (item.options.length !== 0) {
-      console.log(item.options)
-      // HamburguerOptions(item.options);
-      setOrder([...order, item.options])
-    } else if (!order.includes(item)) {
-      item.count = 1;
-      setOrder([...order, item])
+  const handleClickListItem = (item) => {
+    setOpen(true);
+    console.log(item);
+    setBurgerOption(item);
+  };
+
+  const handleClose = newValue => {
+    const itemIndex = order.findIndex(orderItem => orderItem.name === teste.name + ' ' + newValue);
+    if (itemIndex === -1) {
+      teste.count = 1;
+      setOrder([...order, { ...teste, name: teste.name + ' ' + newValue }])
     } else {
-      item.count += 1;
+      order[itemIndex].count += 1;
       setOrder([...order])
     }
-  }
+    setOpen(false);
+  };
 
-  // if (!order.includes(item)) {
-  //   item.count = 1;
-  //   setOrder([...order, item])
-  // } else {
-  //   item.count += 1;
-  //   setOrder([...order])
-  // }
-  // console.log(item);
-  // console.log(item.options);
-  // console.log(item.extra[0].price);
+  const selectOptions = (item) => {
+    const itemIndex = order.findIndex(orderItem => orderItem.name === item.name);
+    if (item.options.length === 0) {
+      if (itemIndex === -1) {
+        item.count = 1;
+        setOrder([...order, item])
+      } else {
+        item.count += 1;
+        setOrder([...order])
+      }
+    } else {
+      handleClickListItem(item.options);
+      setTeste(item)
+    }
+  };
 
   const reduceItem = (item) => {
     if (order.includes(item)) {
@@ -89,15 +113,17 @@ const Lounge = () => {
     }
     const minus = order.filter(element => element.count > 0)
     setOrder([...minus])
-  }
+  };
 
   const removeOrder = (item) => {
     const deleteItem = (order.indexOf(item));
     order.splice(deleteItem, 1);
     setOrder([...order]);
-  }
+  };
 
   const total = order.reduce((acc, item) => acc + (item.count * item.price), 0)
+
+  console.log(value)
 
   return (
     <div>
@@ -117,6 +143,15 @@ const Lounge = () => {
           reduceItem={reduceItem}
           total={total}
           submitOrder={submitOrder}
+        />
+        <AdditionalOptions
+          DialogTitle='Opções de burger'
+          id='burger-options'
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          value={value}
+          burgerOption={burgerOption}
         />
       </div>
     </div>
