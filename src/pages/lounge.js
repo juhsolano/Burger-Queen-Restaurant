@@ -3,9 +3,10 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText'; import { StyleSheet, css } from 'aphrodite';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+import { StyleSheet, css } from 'aphrodite';
 import AdditionalOptions from '../components/AdditionalOptions';
 import alertify from 'alertifyjs';
 
@@ -26,6 +27,7 @@ const Lounge = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState({ options: '' });
   const [burgerOption, setBurgerOption] = useState([]);
+  const [teste, setTeste] = useState({});
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -69,33 +71,40 @@ const Lounge = () => {
     } else if (!table) {
       alertify.error('Informe o nº da mesa');
     }
-  }
-
-  const selectOptions = (item) => {
-    if (item.options.length !== 0) {
-      handleClickListItem(item.options);
-      setOrder([...order, value])//aqui
-    } else if (!order.includes(item)) {
-      item.count = 1;
-      setOrder([...order, item])
-    } else {
-      item.count += 1;
-      setOrder([...order])
-    }
-  }
+  };
 
   const handleClickListItem = (item) => {
     setOpen(true);
+    console.log(item);
     setBurgerOption(item);
   };
 
   const handleClose = newValue => {
-    setOpen(false);
-    if (newValue) {
-      setValue({ options: newValue })
+    const itemIndex = order.findIndex(orderItem => orderItem.name === teste.name + ' ' + newValue);
+    if (itemIndex === -1) {
+      teste.count = 1;
+      setOrder([...order, { ...teste, name: teste.name + ' ' + newValue }])
+    } else {
+      order[itemIndex].count += 1;
+      setOrder([...order])
     }
-    console.log(newValue, "Fui selecionado! (lounge)");
-    console.log(value, 'nada acontece feijoada!');
+    setOpen(false);
+  };
+
+  const selectOptions = (item) => {
+    const itemIndex = order.findIndex(orderItem => orderItem.name === item.name);
+    if (item.options.length === 0) {
+      if (itemIndex === -1) {
+        item.count = 1;
+        setOrder([...order, item])
+      } else {
+        item.count += 1;
+        setOrder([...order])
+      }
+    } else {
+      handleClickListItem(item.options);
+      setTeste(item)
+    }
   };
 
   const reduceItem = (item) => {
@@ -104,15 +113,17 @@ const Lounge = () => {
     }
     const minus = order.filter(element => element.count > 0)
     setOrder([...minus])
-  }
+  };
 
   const removeOrder = (item) => {
     const deleteItem = (order.indexOf(item));
     order.splice(deleteItem, 1);
     setOrder([...order]);
-  }
+  };
 
   const total = order.reduce((acc, item) => acc + (item.count * item.price), 0)
+
+  console.log(value)
 
   return (
     <div>
@@ -133,56 +144,18 @@ const Lounge = () => {
           total={total}
           submitOrder={submitOrder}
         />
-        <List component='div' role='list'>
-          <AdditionalOptions
-            id='burger-options'
-            keepMounted
-            open={open}
-            onClose={handleClose}
-            value={value}
-            burgerOption={burgerOption}
-          />
-        </List>
+        <AdditionalOptions
+          DialogTitle='Opções de burger'
+          id='burger-options'
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          value={value}
+          burgerOption={burgerOption}
+        />
       </div>
     </div>
   );
 }
 
 export default Lounge;
-
-
-<List component="div" role="list">
-  <ListItem button divider disabled role="listitem">
-    <ListItemText primary="Interruptions" />
-  </ListItem>
-  <ListItem
-    button
-    divider
-    aria-haspopup="true"
-    aria-controls="ringtone-menu"
-    aria-label="phone ringtone"
-    onClick={handleClickListItem}
-    role="listitem"
-  >
-    <ListItemText primary="Phone ringtone" secondary={value} />
-  </ListItem>
-  <ListItem button divider disabled role="listitem">
-    <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-  </ListItem>
-  <ConfirmationDialogRaw
-    classes={{
-      paper: classes.paper,
-    }}
-    id="ringtone-menu"
-    keepMounted
-    open={open}
-    onClose={handleClose}
-    value={value}
-  />
-</List>
-
-
-
-
-
-

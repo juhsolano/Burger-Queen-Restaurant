@@ -8,6 +8,9 @@ import Dialog from '@material-ui/core/Dialog';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemText from '@material-ui/core/ListItemText';
 
 const AdditionalOptions = (props) => {
   const { onClose, value: valueProp, open, ...other } = props;
@@ -39,39 +42,39 @@ const AdditionalOptions = (props) => {
   const handleChange = (e) => {
     e.preventDefault();
     setValue(e.target.value);
-    console.log(e.target.value, 'apareço na seleção')
-    console.log(value, 'apareço se há change na seleção')
   };
 
   return (
-    <Dialog
-      disableBackdropClick
-      disableEscapeKeyDown
-      maxWidth='xs'
-      onEntering={handleEntering}
-      aria-labelledby='confirmation-dialog-title'
-      open={open}
-      {...other}
-    >
-      <DialogTitle id='confirmation-dialog-title'>Opções Hambúrguer</DialogTitle>
-      <DialogContent dividers>
-        <RadioGroup
-          ref={radioGroupRef}
-          aria-label='burger'
-          name='burger'
-          value={value}
-          onChange={handleChange}
-        >
-          {props.burgerOption.map(option => (
-            <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
-          ))}
-        </RadioGroup>
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
-        <Button onClick={handleOk} color='primary'>Ok</Button>
-      </DialogActions>
-    </Dialog>
+    <List component='div' role='list'>
+      <Dialog
+        disableBackdropClick
+        disableEscapeKeyDown
+        maxWidth='xs'
+        onEntering={handleEntering}
+        aria-labelledby='confirmation-dialog-title'
+        open={open}
+        {...other}
+      >
+        <DialogTitle id='confirmation-dialog-title'>{props.DialogTitle}</DialogTitle>
+        <DialogContent dividers>
+          <RadioGroup
+            ref={radioGroupRef}
+            aria-label='burger'
+            name='burger'
+            value={value}
+            onChange={handleChange}
+          >
+            {props.burgerOption.map(option => (
+              <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
+            ))}
+          </RadioGroup>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
+          <Button onClick={handleOk} color='primary'>Ok</Button>
+        </DialogActions>
+      </Dialog>
+    </List>
   );
 }
 
