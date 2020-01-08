@@ -7,20 +7,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import List from '@material-ui/core/List';
-import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemText from '@material-ui/core/ListItemText';
 
 const AdditionalOptions = (props) => {
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = useState(valueProp);
   const radioGroupRef = useRef(null);
-  const [state, setState] = useState({
-    checkedA: true,
-  });
+  const [extra, setExtra] = useState({});
+  console.log(extra)
 
   useEffect(() => {
     if (!open) {
@@ -48,9 +45,8 @@ const AdditionalOptions = (props) => {
   };
 
   const handleChecked = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+    setExtra({ ...extra, [name]: event.target.checked });
   };
-
 
   return (
     <List component='div' role='list'>
@@ -78,13 +74,16 @@ const AdditionalOptions = (props) => {
           </RadioGroup>
         </DialogContent>
         <DialogTitle id='confirmation-dialog-title'>Extras</DialogTitle>
-        <FormGroup column>
-          <FormControlLabel
-            control={<Checkbox checked={state.checkedA} onChange={handleChecked('checkedA')} value="checkedA" />}
-            label="Ovo"
-          />
-          <FormControlLabel control={<Checkbox value="checkedC" />} label="Queijo" />
-        </FormGroup>
+        <DialogContent dividers>
+          <FormGroup column
+          >
+            {props.burgerOption.map(extra => (
+              <FormControlLabel
+                control={<Checkbox checked={extra.checked} onChange={handleChecked('checked')} value={extra} />}
+                label={extra}
+              />))}
+          </FormGroup>
+        </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
           <Button onClick={handleOk} color='primary'>Ok</Button>
@@ -95,5 +94,3 @@ const AdditionalOptions = (props) => {
 }
 
 export default AdditionalOptions;
-
-//preciso enfiar um map nos extras
