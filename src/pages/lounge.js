@@ -23,8 +23,9 @@ const Lounge = () => {
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
   const [value] = useState('');
-  const [burgerOption, setBurgerOption] = useState([]);
+  const [burger, setBurger] = useState([]);
   const [option, setOption] = useState({});
+  const [extra, setExtra] = useState({});
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -72,14 +73,16 @@ const Lounge = () => {
 
   const handleClickListItem = (item) => {
     setOpen(true);
-    setBurgerOption(item);
+    setBurger(item);
   };
 
-  const handleClose = selectOption => {
-    const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption);
+  const handleClose = (selectOption, selectExtra) => {
+    console.log(extra.extra)
+    const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption + ' ' + extra.extra);
     if (itemIndex === -1) {
       option.count = 1;
-      setOrder([...order, { ...option, name: option.name + ' ' + selectOption }])
+      setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra }])
+      console.log(selectOption)
     } else {
       order[itemIndex].count += 1;
       setOrder([...order])
@@ -98,7 +101,7 @@ const Lounge = () => {
         setOrder([...order])
       }
     } else {
-      handleClickListItem(item.options);
+      handleClickListItem(item);
       setOption(item)
     }
   };
@@ -117,7 +120,17 @@ const Lounge = () => {
     setOrder([...order]);
   };
 
-  const total = order.reduce((acc, item) => acc + (item.count * item.price), 0)
+  const total = order.reduce((acc, item) => acc + (item.count * item.price), 0);
+
+  // const handleChecked = name => event => {
+  //   setExtra({ ...extra, [name]: event.target.checked });
+  //   console.log(name)
+  // };
+
+  // const handleChecked = name => {
+  //   setExtra(name.extra)
+  //   console.log(name.extra)
+  // };
 
   return (
     <div>
@@ -144,11 +157,14 @@ const Lounge = () => {
           open={open}
           onClose={handleClose}
           value={value}
-          burgerOption={burgerOption}
+          burger={burger}
+          extra={extra}
+          setExtra={setExtra}
         />
       </div>
     </div>
   );
 }
+// handleChecked={handleChecked}
 
 export default Lounge;

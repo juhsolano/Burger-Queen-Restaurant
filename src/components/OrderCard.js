@@ -1,6 +1,9 @@
 import React from 'react';
 import Button from '../components/Button';
 import { StyleSheet, css } from 'aphrodite';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const styles = StyleSheet.create({
   standardStyle: {
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     borderRadius: '100px',
     padding: '20px',
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: '20px',
     // display: 'inline - block',
     width: '5vw',
@@ -67,7 +70,7 @@ const OrderCard = (props) => {
                   e.preventDefault();
                   props.reduceItem(element);
                 }}
-                title='➖'
+                title={<FontAwesomeIcon icon={faMinus} size="xs" />}
               />
             </div>
             <div>{element.count}</div>
@@ -79,7 +82,7 @@ const OrderCard = (props) => {
                   e.preventDefault();
                   props.removeOrder(element);
                 }}
-                title='✖'
+                title={<FontAwesomeIcon icon={faTrash} size="xs" />}
               />
             </div>
           </div>
