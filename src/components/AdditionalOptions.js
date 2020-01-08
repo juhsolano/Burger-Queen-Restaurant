@@ -51,7 +51,6 @@ const AdditionalOptions = (props) => {
     // console.log(event.target.checked)
     // console.log(name)
   };
-  // console.log(extra)
 
   return (
     <List component='div' role='list'>

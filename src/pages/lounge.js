@@ -76,13 +76,17 @@ const Lounge = () => {
     setBurger(item);
   };
 
-  const handleClose = (selectOption, selectExtra) => {
+  const handleClose = (selectOption) => {
     console.log(extra.extra)
     const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption + ' ' + extra.extra);
     if (itemIndex === -1) {
       option.count = 1;
-      setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra }])
-      console.log(selectOption)
+      if (Object.keys(extra).length !== 0) {
+        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }])
+        console.log(selectOption)
+      } else {
+        setOrder([...order, { ...option, name: option.name + ' ' + selectOption }])
+      }
     } else {
       order[itemIndex].count += 1;
       setOrder([...order])
