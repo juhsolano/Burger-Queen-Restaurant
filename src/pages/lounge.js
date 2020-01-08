@@ -3,9 +3,6 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
 import { StyleSheet, css } from 'aphrodite';
 import AdditionalOptions from '../components/AdditionalOptions';
 import alertify from 'alertifyjs';
@@ -25,9 +22,9 @@ const Lounge = () => {
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState({ options: '' });
+  const [value] = useState('');
   const [burgerOption, setBurgerOption] = useState([]);
-  const [teste, setTeste] = useState({});
+  const [option, setOption] = useState({});
 
   useEffect(() => {
     firebaseApp.collection('menu')
@@ -75,15 +72,14 @@ const Lounge = () => {
 
   const handleClickListItem = (item) => {
     setOpen(true);
-    console.log(item);
     setBurgerOption(item);
   };
 
-  const handleClose = newValue => {
-    const itemIndex = order.findIndex(orderItem => orderItem.name === teste.name + ' ' + newValue);
+  const handleClose = selectOption => {
+    const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption);
     if (itemIndex === -1) {
-      teste.count = 1;
-      setOrder([...order, { ...teste, name: teste.name + ' ' + newValue }])
+      option.count = 1;
+      setOrder([...order, { ...option, name: option.name + ' ' + selectOption }])
     } else {
       order[itemIndex].count += 1;
       setOrder([...order])
@@ -103,7 +99,7 @@ const Lounge = () => {
       }
     } else {
       handleClickListItem(item.options);
-      setTeste(item)
+      setOption(item)
     }
   };
 
@@ -111,7 +107,7 @@ const Lounge = () => {
     if (order.includes(item)) {
       item.count -= 1;
     }
-    const minus = order.filter(element => element.count > 0)
+    const minus = order.filter(selectItem => selectItem.count > 0)
     setOrder([...minus])
   };
 
@@ -122,8 +118,6 @@ const Lounge = () => {
   };
 
   const total = order.reduce((acc, item) => acc + (item.count * item.price), 0)
-
-  console.log(value)
 
   return (
     <div>
@@ -145,8 +139,7 @@ const Lounge = () => {
           submitOrder={submitOrder}
         />
         <AdditionalOptions
-          DialogTitle='Opções de burger'
-          id='burger-options'
+          id='burger-options-extras'
           keepMounted
           open={open}
           onClose={handleClose}
