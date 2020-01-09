@@ -1,6 +1,9 @@
 import React from 'react';
 import Button from '../components/Button';
 import { StyleSheet, css } from 'aphrodite';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const styles = StyleSheet.create({
   standardStyle: {
@@ -10,7 +13,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     textAlign: 'center',
     verticalAlign: 'middle',
-    // alignItems: 'center',
     width: '50vw',
     borderStyle: 'solid',
     borderWidth: '2px',
@@ -27,18 +29,24 @@ const styles = StyleSheet.create({
     display: 'flex',
     margin: '3px',
     color: '#000000',
-    // backgroundColor: '#c0392b',
     borderRadius: '100px',
-    // border: '2px solid black',
     padding: '20px',
-    textAlign: 'center',
+    // textAlign: 'center',
     fontSize: '20px',
-    display: 'inline - block',
+    // display: 'inline - block',
     width: '5vw',
     height: '5vw'
   },
   orderButton: {
+    justifyContent: 'space-evenly',
+    fontSize: '14px',
     backgroundColor: '#2ecc71',
+    borderColor: '#000000',
+    borderStyle: 'groove',
+    borderRadius: '5px',
+    width: '20vw',
+    height: '5vw',
+    margin: '1.5px',
   },
   totalStyle: {
     borderTopStyle: 'solid',
@@ -62,7 +70,7 @@ const OrderCard = (props) => {
                   e.preventDefault();
                   props.reduceItem(element);
                 }}
-                title='➖'
+                title={<FontAwesomeIcon icon={faMinus} size="xs" />}
               />
             </div>
             <div>{element.count}</div>
@@ -74,7 +82,7 @@ const OrderCard = (props) => {
                   e.preventDefault();
                   props.removeOrder(element);
                 }}
-                title='✖'
+                title={<FontAwesomeIcon icon={faTrash} size="xs" />}
               />
             </div>
           </div>

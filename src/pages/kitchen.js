@@ -21,8 +21,7 @@ const Kitchen = () => {
   // }, []);
 
   return (
-    <p>JUANITA ESTÁ NA COZINHA PREPARANDO UM CÓDIGO!</p> ,
-    <p>QUE DEMORA JUANITA!</p>
+    <p>JUANITA ESTÁ NA COZINHA PREPARANDO UM CÓDIGO!</p>
   );
 };
 

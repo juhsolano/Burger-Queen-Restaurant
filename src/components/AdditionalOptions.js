@@ -7,10 +7,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const AdditionalOptions = (props) => {
   const { onClose, value: valueProp, open, ...other } = props;
@@ -18,12 +18,10 @@ const AdditionalOptions = (props) => {
   const radioGroupRef = useRef(null);
 
   useEffect(() => {
-
     if (!open) {
       setValue(valueProp);
     }
   }, [valueProp, open]);
-
 
   const handleEntering = () => {
     if (radioGroupRef.current != null) {
@@ -44,6 +42,22 @@ const AdditionalOptions = (props) => {
     setValue(e.target.value);
   };
 
+  const handleChecked = name => event => {
+    if (event.target.checked) {
+      props.setExtra(name)
+    }
+  };
+
+  // const handleChecked = name => event => {
+  //   if (event.target.checked) {
+  //     props.setExtra(name)
+  //   } else if (!name.contains(event.target.checked)) {
+  //     props.setExtra(name)
+  //   }
+  //   console.log(name)
+  //   console.log(props.extra)
+  // };
+
   return (
     <List component='div' role='list'>
       <Dialog
@@ -55,7 +69,7 @@ const AdditionalOptions = (props) => {
         open={open}
         {...other}
       >
-        <DialogTitle id='confirmation-dialog-title'>{props.DialogTitle}</DialogTitle>
+        <DialogTitle id='confirmation-dialog-title'>Opções de Burguer</DialogTitle>
         <DialogContent dividers>
           <RadioGroup
             ref={radioGroupRef}
@@ -64,10 +78,22 @@ const AdditionalOptions = (props) => {
             value={value}
             onChange={handleChange}
           >
-            {props.burgerOption.map(option => (
-              <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
-            ))}
+            {props.burger.length !== 0 ?
+              props.burger.options.map(option => (
+                <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
+              )) : false}
           </RadioGroup>
+        </DialogContent>
+        <DialogTitle id='confirmation-dialog-title'>Extras</DialogTitle>
+        <DialogContent dividers>
+          <FormGroup column='true'>
+            {props.burger.length !== 0 ?
+              props.burger.extra.map(extra => (
+                <FormControlLabel
+                  control={<Checkbox checked={extra.checked} onChange={handleChecked({ extra })} value={extra} />}
+                  label={extra}
+                />)) : false}
+          </FormGroup>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
