@@ -22,7 +22,7 @@ const Lounge = () => {
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
-  const [value] = useState('');
+  const [value] = useState('carne bovina');
   const [burger, setBurger] = useState([]);
   const [option, setOption] = useState({});
   const [extra, setExtra] = useState({});
@@ -77,15 +77,20 @@ const Lounge = () => {
   };
 
   const handleClose = (selectOption) => {
-    console.log(extra.extra)
+    if (extra.extra === undefined) {
+      extra.extra = '';
+    }
     const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption + ' ' + extra.extra);
+    console.log(option.name + ' ' + selectOption + ' ' + extra.extra);
+    console.log(order)
     if (itemIndex === -1) {
+      console.log(option.name)
       option.count = 1;
-      if (Object.keys(extra).length !== 0) {
-        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }])
-        console.log(selectOption)
+      if (Object.keys(extra).length !== 0 && extra.extra !== '') {
+        console.log(extra)
+        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }]);
       } else {
-        setOrder([...order, { ...option, name: option.name + ' ' + selectOption }])
+        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra }])
       }
     } else {
       order[itemIndex].count += 1;

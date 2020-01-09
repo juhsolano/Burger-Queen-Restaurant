@@ -45,7 +45,11 @@ const AdditionalOptions = (props) => {
   const handleChecked = name => event => {
     if (event.target.checked) {
       props.setExtra(name)
+      console.log(name)
+    } else {
+      props.setExtra({})
     }
+    console.log(event.target.checked);
   };
 
   // const handleChecked = name => event => {
