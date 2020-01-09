@@ -160,6 +160,5 @@ const Lounge = () => {
     </div>
   );
 }
-// handleChecked={handleChecked}
 
 export default Lounge;
