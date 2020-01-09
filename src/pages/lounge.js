@@ -92,6 +92,7 @@ const Lounge = () => {
       setOrder([...order])
     }
     setOpen(false);
+    setExtra({});
   };
 
   const selectOptions = (item) => {
@@ -125,16 +126,6 @@ const Lounge = () => {
   };
 
   const total = order.reduce((acc, item) => acc + (item.count * item.price), 0);
-
-  // const handleChecked = name => event => {
-  //   setExtra({ ...extra, [name]: event.target.checked });
-  //   console.log(name)
-  // };
-
-  // const handleChecked = name => {
-  //   setExtra(name.extra)
-  //   console.log(name.extra)
-  // };
 
   return (
     <div>

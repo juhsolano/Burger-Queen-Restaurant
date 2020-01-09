@@ -16,7 +16,6 @@ const AdditionalOptions = (props) => {
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = useState(valueProp);
   const radioGroupRef = useRef(null);
-  // const [extra, setExtra] = useState({});
 
   useEffect(() => {
     if (!open) {
@@ -47,10 +46,17 @@ const AdditionalOptions = (props) => {
     if (event.target.checked) {
       props.setExtra(name)
     }
-    // setExtra({ ...extra, [name]: event.target.checked });
-    // console.log(event.target.checked)
-    // console.log(name)
   };
+
+  // const handleChecked = name => event => {
+  //   if (event.target.checked) {
+  //     props.setExtra(name)
+  //   } else if (!name.contains(event.target.checked)) {
+  //     props.setExtra(name)
+  //   }
+  //   console.log(name)
+  //   console.log(props.extra)
+  // };
 
   return (
     <List component='div' role='list'>
