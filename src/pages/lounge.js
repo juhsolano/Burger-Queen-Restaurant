@@ -98,6 +98,7 @@ const Lounge = () => {
     }
     setOpen(false);
     setExtra({});
+    console.log(extra)
   };
 
   const selectOptions = (item) => {
@@ -153,7 +154,6 @@ const Lounge = () => {
         />
         <AdditionalOptions
           id='burger-options-extras'
-          keepMounted
           open={open}
           onClose={handleClose}
           value={value}
