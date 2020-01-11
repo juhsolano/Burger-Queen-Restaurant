@@ -29,10 +29,6 @@ const AdditionalOptions = (props) => {
     }
   };
 
-  const handleCancel = () => {
-    onClose();
-  };
-
   const handleOk = () => {
     onClose(value);
   }
@@ -88,7 +84,7 @@ const AdditionalOptions = (props) => {
           </FormGroup>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
+          <Button autoFocus onClick={props.onCancel} color='primary'>Cancelar</Button>
           <Button onClick={handleOk} color='primary'>Ok</Button>
         </DialogActions>
       </Dialog>

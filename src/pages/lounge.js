@@ -27,6 +27,9 @@ const Lounge = () => {
   const [option, setOption] = useState({});
   const [extra, setExtra] = useState({});
 
+  console.log(order.map(i => i.id))
+
+
   useEffect(() => {
     firebaseApp.collection('menu')
       .get()
@@ -81,13 +84,9 @@ const Lounge = () => {
       extra.extra = '';
     }
     const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption + ' ' + extra.extra);
-    console.log(option.name + ' ' + selectOption + ' ' + extra.extra);
-    console.log(order)
     if (itemIndex === -1) {
-      console.log(option.name)
       option.count = 1;
       if (Object.keys(extra).length !== 0 && extra.extra !== '') {
-        console.log(extra)
         setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }]);
       } else {
         setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra }])
@@ -98,7 +97,6 @@ const Lounge = () => {
     }
     setOpen(false);
     setExtra({});
-    console.log(extra)
   };
 
   const selectOptions = (item) => {
@@ -160,6 +158,7 @@ const Lounge = () => {
           burger={burger}
           extra={extra}
           setExtra={setExtra}
+          onCancel={() => setOpen(false)}
         />
       </div>
     </div>
