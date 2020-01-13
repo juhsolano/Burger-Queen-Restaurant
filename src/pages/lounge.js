@@ -27,9 +27,6 @@ const Lounge = () => {
   const [option, setOption] = useState({});
   const [extra, setExtra] = useState({});
 
-  console.log(order.map(i => i.id))
-
-
   useEffect(() => {
     firebaseApp.collection('menu')
       .get()
@@ -56,7 +53,7 @@ const Lounge = () => {
           table: table,
           clientOrder: order,
           bill: total,
-          dispatchTime: new Date().toLocaleString('pt-BR'),
+          dispatchTime: Date.now(),//new Date().getTime(), //.toLocaleString('pt-BR'),
           status: 'Encaminhado',
         })
         .then(() => {

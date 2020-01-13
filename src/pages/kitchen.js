@@ -1,35 +1,42 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import firebaseApp from '../utils/firebaseUtils';
-import KitchenCard from '../components/KitchenCard';
+import Forwarded from '../components/Forwarded';
+import ReadyOrders from '../components/ReadyOrders';
 
 const Kitchen = () => {
-
-  const [ordered, setOrdered] = useState([]);
+  const [forwarded, setForwarded] = useState([]);
+  const [readyOrders, setReadyOrders] = useState([]);
 
   useEffect(() => {
-    firebaseApp.collection('order')
-      .where('status', '==', 'Encaminhado')
+    firebaseApp
+      .collection('order')
       .orderBy('dispatchTime', 'asc')
-      .get()
-      .then((snapshot) => {
-        const printOrder = snapshot.docs.map((ord) => ({
+      .onSnapshot((snapshot) => {
+        const request = snapshot.docs.map((ord) => ({
           id: ord.id,
           ...ord.data()
         }))
-        setOrdered(printOrder);
-      }, [])
-  });
+        setForwarded(request.filter((forwardedItens) => forwardedItens.status === 'Encaminhado'));
+
+        const final = snapshot.docs.map((ord) => ({
+          id: ord.id,
+          ...ord.data()
+        }))
+        setReadyOrders(final.filter((readyItens) => readyItens.status === 'Pronto'));
+        console.log(final)
+      })
+  }, [])
 
   const changeStatus = (orderItem) => {
     firebaseApp.collection('order')
       .doc(orderItem.id)
       .update({
-        deliver: 'A entregar',
         status: 'Pronto',
-        dispatchTime: new Date().getTime(),
+        readyTime: new Date().getTime(),
+        deliverOrder: 'A entregar',
       })
-    console.log('Olá Juanitinha')
+    console.log('Olá Juanitinha, mudei meu STATUS e adicionei coisinhas')
   }
 
   return (
@@ -37,17 +44,13 @@ const Kitchen = () => {
       <h1>COZINHA</h1>
       <h2>PEDIDOS A PREPARAR</h2>
       <div>
-        {ordered.map((item) =>
-          <KitchenCard
-            changeStatus={changeStatus}
-            clientName={item.clientName}
-            table={item.table}
-            clientOrder={item.clientOrder}
-            dispatchTime={item.dispatchTime}
-            status={item.status}
-            key={item.id}
-          />
-        )}
+        <Forwarded
+          forwarded={forwarded}
+          changeStatus={changeStatus}
+        />
+        <ReadyOrders
+          readyOrders={readyOrders}
+        />
       </div>
     </div>
   );
@@ -55,29 +58,3 @@ const Kitchen = () => {
 };
 
 export default Kitchen;
-
-
-
-
-
-
-
-
-
-
-
-
-// const [luke, setLuke] = useState([]);
-// const [yoda, setYoda] = useState([]);
-//   useEffect(() => {
-//     firebaseApp.collection('order')
-//       .where('status', '==', 'Encaminhado')
-//       .orderBy('dispatchTime', 'asc')
-//       .then((snapshot) => {
-//         const ray = snapshot.docs.map((orderItem) => {
-//           id: orderItem.id,
-//         ...orderItem.data()
-//       })
-//     setLuke(orderItem);
-//   })
-// }, []);
