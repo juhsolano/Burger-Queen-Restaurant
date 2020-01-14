@@ -4,25 +4,26 @@ import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
   standardStyle: {
-    margin: '5px',
     display: 'flex',
+    margin: '5px',
     flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '50vw',
     borderStyle: 'solid',
     borderWidth: '2px',
     borderRadius: '5px',
     borderColor: '#95a5a6',
-    color: '#ecf0f1'
+    color: '#ecf0f1',
   },
   menuStyle: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '15px',
-    padding: '4px',
-    flexWrap: 'wrap',
-    flexFlow: 'row-wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    marginBottom: '5%',
+
+
   },
   titleStyle: {
     display: 'flex',
@@ -30,11 +31,15 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: '20px',
+    fontWeight: 'bold',
   },
   buttonOrganization: {
-    width: '22rem',
     display: 'flex',
     flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    width: '100%',
   }
 });
 
@@ -45,7 +50,7 @@ const OptionsCard = (props) => {
   return (
     <div className={css(styles.standardStyle)}>
       <section className={css(styles.menuStyle)}>
-        <h4 className={css(styles.titleStyle)}>Café da Manhã</h4>
+        <h4 className={css(styles.titleStyle)}>CAFÉ DA MANHÃ</h4>
         <div className={css(styles.buttonOrganization)}>
           {breakfastMenu.map((item) => <ClickableSection handleClick={(e) => {
             e.preventDefault();
@@ -56,7 +61,7 @@ const OptionsCard = (props) => {
         </div>
       </section>
       <section className={css(styles.menuStyle)}>
-        <h4 className={css(styles.titleStyle)}>Almoço e jantar</h4>
+        <h4 className={css(styles.titleStyle)}>ALMOÇO E JANTAR</h4>
         <div className={css(styles.buttonOrganization)}>
           {lunchMenu.map((item) => <ClickableSection handleClick={(e) => {
             e.preventDefault();

@@ -24,7 +24,6 @@ const Kitchen = () => {
           ...ord.data()
         }))
         setReadyOrders(final.filter((readyItens) => readyItens.status === 'Pronto'));
-        console.log(final)
       })
   }, [])
 
@@ -36,7 +35,6 @@ const Kitchen = () => {
         readyTime: new Date().getTime(),
         deliverOrder: 'A entregar',
       })
-    console.log('Olá Juanitinha, mudei meu STATUS e adicionei coisinhas')
   }
 
   return (

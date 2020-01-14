@@ -17,7 +17,7 @@ const ReadyOrders = (props) => {
       <section>
         {readyOrders.map((ready) => (
           <div key={ready.id}>
-            <p>{leadTime(new Date(readyOrders.readyTime), new Date(readyOrders.dispatchTime))}</p>
+            <p>Tempo gasto: {leadTime(new Date(ready.readyTime), new Date(ready.dispatchTime))}</p>
             <p>Cliente: {ready.clientName}</p>
             <p>Nº da Mesa: {ready.table}</p>
             <p>Pedido:</p>

@@ -24,9 +24,8 @@ const Forwarded = (props) => {
       <section>
         {forwarded.map((individualOrder) => (
           <div key={individualOrder.id}>
-            <p> Cliente: {individualOrder.clientName}</p>
+            <p>Cliente: {individualOrder.clientName}</p>
             <p>Nº da Mesa: {individualOrder.table}</p>
-            {console.log(individualOrder.dispatchTime)}
             <p>Pedido:</p>
             <p>
               {individualOrder.clientOrder.map((selectedItens) => (

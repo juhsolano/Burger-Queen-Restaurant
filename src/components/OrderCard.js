@@ -24,34 +24,46 @@ const styles = StyleSheet.create({
   orderCardStyle: {
     display: 'flex',
     justifyContent: 'space-around',
+    alignItems: 'center',
   },
   buttonStyle: {
     display: 'flex',
     margin: '3px',
     color: '#000000',
     borderRadius: '100px',
-    padding: '20px',
-    // textAlign: 'center',
-    fontSize: '20px',
-    // display: 'inline - block',
+    padding: '18px',
+    textAlign: 'center',
+    fontSize: '25px',
     width: '5vw',
     height: '5vw'
   },
   orderButton: {
-    justifyContent: 'space-evenly',
-    fontSize: '14px',
-    backgroundColor: '#2ecc71',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#ecf0f1',
+    backgroundColor: '#27ae60',
     borderColor: '#000000',
-    borderStyle: 'groove',
     borderRadius: '5px',
     width: '20vw',
     height: '5vw',
-    margin: '1.5px',
   },
   totalStyle: {
     borderTopStyle: 'solid',
     borderWidth: '0.5px',
     borderColor: '#ecf0f1',
+  },
+  itemStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'space-between',
+    width: '60%',
+  },
+  countStyle: {
+    marginRight: '10px',
+  },
+  priceStyle: {
+    marginLeft: '25px',
+    width: '30%',
   }
 });
 
@@ -70,19 +82,21 @@ const OrderCard = (props) => {
                   e.preventDefault();
                   props.reduceItem(element);
                 }}
-                title={<FontAwesomeIcon icon={faMinus} size="xs" />}
+                title={<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}
               />
             </div>
-            <div>{element.count}</div>
-            <div>{element.name}</div>
-            <div>R${element.price},00</div>
+            <div className={css(styles.itemStyle)}>
+              <div className={css(styles.countStyle)}>{element.count} x</div>
+              <div className={css(styles.nameStyle)}>{element.name}</div>
+              <div className={css(styles.priceStyle)}>R${element.price},00</div>
+            </div>
             <div>
               <Button className={css(styles.buttonStyle)}
                 handleClick={(e) => {
                   e.preventDefault();
                   props.removeOrder(element);
                 }}
-                title={<FontAwesomeIcon icon={faTrash} size="xs" />}
+                title={<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}
               />
             </div>
           </div>

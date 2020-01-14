@@ -5,15 +5,15 @@ const styles = StyleSheet.create({
   optionsStyle: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    fontSize: '14px',
-    backgroundColor: '#e67e22',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontSize: '18px',
+    backgroundColor: '#d35400',
     borderColor: '#000000',
-    borderStyle: 'groove',
     borderRadius: '5px',
     width: '20vw',
     height: '5vw',
-    margin: '1.5px',
+    margin: '3px',
   },
 });
 

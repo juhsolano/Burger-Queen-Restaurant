@@ -11,7 +11,38 @@ const styles = StyleSheet.create({
   loungeStandard: {
     display: 'flex',
     justifyContent: 'space-around',
-  }
+  },
+  inputStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: '5px',
+    marginTop: '4%',
+    marginBottom: '1%',
+  },
+  inputName: {
+    display: 'flex',
+    fontSize: '16px',
+    padding: '5px',
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderStyle: 'groove',
+    borderRadius: '5px',
+    height: '4vw',
+    margin: '1.5px',
+    width: '35%',
+  },
+  inputNumber: {
+    display: 'flex',
+    fontSize: '16px',
+    padding: '5px',
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderStyle: 'groove',
+    borderRadius: '5px',
+    height: '4vw',
+    margin: '1.5px',
+    width: '12%',
+  },
 });
 
 const Lounge = () => {
@@ -53,7 +84,7 @@ const Lounge = () => {
           table: table,
           clientOrder: order,
           bill: total,
-          dispatchTime: Date.now(),//new Date().getTime(), //.toLocaleString('pt-BR'),
+          dispatchTime: new Date().getTime(),
           status: 'Encaminhado',
         })
         .then(() => {
@@ -130,9 +161,9 @@ const Lounge = () => {
 
   return (
     <div>
-      <div>
-        <Input type='text' value={client} placeholder='Nome cliente' handleChange={event => setClient(event.currentTarget.value)} />
-        <Input type='number' value={table} placeholder='Nº de Mesa' handleChange={event => setTable(event.currentTarget.value)} />
+      <div className={css(styles.inputStyle)}>
+        <Input className={css(styles.inputName)} type='text' value={client} placeholder='Nome do cliente' handleChange={event => setClient(event.currentTarget.value)} />
+        <Input className={css(styles.inputNumber)} type='number' value={table} placeholder='Nº da Mesa' handleChange={event => setTable(event.currentTarget.value)} />
       </div>
       <div className={css(styles.loungeStandard)}>
         <OptionsCard
@@ -163,3 +194,4 @@ const Lounge = () => {
 }
 
 export default Lounge;
+
