@@ -24,6 +24,6 @@ const ClickableSection = (props) => {
       <div>R${props.price},00</div>
     </button>
   );
-}
+};
 
 export default ClickableSection;

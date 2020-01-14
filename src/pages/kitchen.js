@@ -33,7 +33,7 @@ const Kitchen = () => {
         }))
         setReadyOrders(final.filter((readyItens) => readyItens.status === 'Pronto para entrega'));
       })
-  }, [])
+  }, []);
 
   const changeStatus = (orderItem) => {
     firebaseApp.collection('order')
@@ -42,7 +42,7 @@ const Kitchen = () => {
         status: 'Pronto para entrega',
         readyTime: new Date().getTime(),
         deliverOrder: 'A entregar',
-      })
+      });
   };
 
   return (

@@ -189,6 +189,6 @@ const Lounge = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Lounge;

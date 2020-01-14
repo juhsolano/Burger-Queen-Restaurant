@@ -10,6 +10,6 @@ const Input = (props) => {
       onChange={props.handleChange}
     />
   );
-}
+};
 
 export default Input;
