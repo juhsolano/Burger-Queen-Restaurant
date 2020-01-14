@@ -5,6 +5,57 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+
+const OrderCard = (props) => {
+  const order = props.order;
+
+  return (
+    <div className={css(styles.standardStyle)}>
+      <section>
+        <h4>PEDIDO</h4>
+        {order.map((element) => (
+          <div key={element.id} className={css(styles.orderCardStyle)}>
+            <div>
+              <Button className={css(styles.buttonStyle)}
+                handleClick={(e) => {
+                  e.preventDefault();
+                  props.reduceItem(element);
+                }}
+                title={<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}
+              />
+            </div>
+            <div className={css(styles.itemStyle)}>
+              <div className={css(styles.countStyle)}>{element.count} x</div>
+              <div className={css(styles.nameStyle)}>{element.name}</div>
+              <div className={css(styles.priceStyle)}>R${element.price},00</div>
+            </div>
+            <div>
+              <Button className={css(styles.buttonStyle)}
+                handleClick={(e) => {
+                  e.preventDefault();
+                  props.removeOrder(element);
+                }}
+                title={<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}
+              />
+            </div>
+          </div>
+        ))}
+        <div className={css(styles.totalStyle)}>
+          <p>Total = R${props.total},00</p>
+        </div>
+        <Button className={css(styles.orderButton)}
+          handleClick={(e) => {
+            e.preventDefault();
+            props.submitOrder();
+          }}
+          title='ENVIAR PEDIDO' />
+      </section>
+    </div>
+  );
+};
+
+export default OrderCard;
+
 const styles = StyleSheet.create({
   standardStyle: {
     margin: '5px',
@@ -66,53 +117,3 @@ const styles = StyleSheet.create({
     width: '30%',
   }
 });
-
-const OrderCard = (props) => {
-  const order = props.order;
-
-  return (
-    <div className={css(styles.standardStyle)}>
-      <section>
-        <h4>PEDIDO</h4>
-        {order.map((element) => (
-          <div key={element.id} className={css(styles.orderCardStyle)}>
-            <div>
-              <Button className={css(styles.buttonStyle)}
-                handleClick={(e) => {
-                  e.preventDefault();
-                  props.reduceItem(element);
-                }}
-                title={<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}
-              />
-            </div>
-            <div className={css(styles.itemStyle)}>
-              <div className={css(styles.countStyle)}>{element.count} x</div>
-              <div className={css(styles.nameStyle)}>{element.name}</div>
-              <div className={css(styles.priceStyle)}>R${element.price},00</div>
-            </div>
-            <div>
-              <Button className={css(styles.buttonStyle)}
-                handleClick={(e) => {
-                  e.preventDefault();
-                  props.removeOrder(element);
-                }}
-                title={<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}
-              />
-            </div>
-          </div>
-        ))}
-        <div className={css(styles.totalStyle)}>
-          <p>Total = R${props.total},00</p>
-        </div>
-        <Button className={css(styles.orderButton)}
-          handleClick={(e) => {
-            e.preventDefault();
-            props.submitOrder();
-          }}
-          title='ENVIAR PEDIDO' />
-      </section>
-    </div>
-  );
-};
-
-export default OrderCard;

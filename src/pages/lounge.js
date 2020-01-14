@@ -7,43 +7,6 @@ import { StyleSheet, css } from 'aphrodite';
 import AdditionalOptions from '../components/AdditionalOptions';
 import alertify from 'alertifyjs';
 
-const styles = StyleSheet.create({
-  loungeStandard: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-  inputStyle: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginRight: '5px',
-    marginTop: '4%',
-    marginBottom: '1%',
-  },
-  inputName: {
-    display: 'flex',
-    fontSize: '16px',
-    padding: '5px',
-    backgroundColor: '##ecf0f1',
-    borderColor: '#95a5a6',
-    borderStyle: 'groove',
-    borderRadius: '5px',
-    height: '4vw',
-    margin: '1.5px',
-    width: '35%',
-  },
-  inputNumber: {
-    display: 'flex',
-    fontSize: '16px',
-    padding: '5px',
-    backgroundColor: '##ecf0f1',
-    borderColor: '#95a5a6',
-    borderStyle: 'groove',
-    borderRadius: '5px',
-    height: '4vw',
-    margin: '1.5px',
-    width: '12%',
-  },
-});
 
 const Lounge = () => {
 
@@ -85,7 +48,7 @@ const Lounge = () => {
           clientOrder: order,
           bill: total,
           dispatchTime: new Date().getTime(),
-          status: 'Encaminhado',
+          status: 'A preparar',
         })
         .then(() => {
           alertify.success('Pedido encaminhado com sucesso!');
@@ -194,4 +157,42 @@ const Lounge = () => {
 }
 
 export default Lounge;
+
+const styles = StyleSheet.create({
+  loungeStandard: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  inputStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: '5px',
+    marginTop: '4%',
+    marginBottom: '1%',
+  },
+  inputName: {
+    display: 'flex',
+    fontSize: '16px',
+    padding: '5px',
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderStyle: 'groove',
+    borderRadius: '5px',
+    height: '4vw',
+    margin: '1.5px',
+    width: '35%',
+  },
+  inputNumber: {
+    display: 'flex',
+    fontSize: '16px',
+    padding: '5px',
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderStyle: 'groove',
+    borderRadius: '5px',
+    height: '4vw',
+    margin: '1.5px',
+    width: '12%',
+  },
+});
 

@@ -1,6 +1,17 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
+const ClickableSection = (props) => {
+  return (
+    <button className={css(styles.optionsStyle)} onClick={props.handleClick} key={props.id}>
+      <div>{props.name}</div>
+      <div>R${props.price},00</div>
+    </button>
+  );
+}
+
+export default ClickableSection;
+
 const styles = StyleSheet.create({
   optionsStyle: {
     display: 'flex',
@@ -16,14 +27,3 @@ const styles = StyleSheet.create({
     margin: '3px',
   },
 });
-
-const ClickableSection = (props) => {
-  return (
-    <button className={css(styles.optionsStyle)} onClick={props.handleClick} key={props.id}>
-      <div>{props.name}</div>
-      <div>R${props.price},00</div>
-    </button>
-  );
-}
-
-export default ClickableSection;

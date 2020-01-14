@@ -2,47 +2,6 @@ import React from 'react';
 import ClickableSection from '../components/ClickableSection';
 import { StyleSheet, css } from 'aphrodite';
 
-const styles = StyleSheet.create({
-  standardStyle: {
-    display: 'flex',
-    margin: '5px',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '50vw',
-    borderStyle: 'solid',
-    borderWidth: '2px',
-    borderRadius: '5px',
-    borderColor: '#95a5a6',
-    color: '#ecf0f1',
-  },
-  menuStyle: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '5%',
-
-
-  },
-  titleStyle: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '20px',
-    fontWeight: 'bold',
-  },
-  buttonOrganization: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    width: '100%',
-  }
-});
-
 const OptionsCard = (props) => {
   const breakfastMenu = props.breakfastMenu;
   const lunchMenu = props.lunchMenu;
@@ -71,8 +30,47 @@ const OptionsCard = (props) => {
             key={item.id} />)}
         </div>
       </section>
-    </div >
+    </div>
   )
 };
 
 export default OptionsCard;
+
+const styles = StyleSheet.create({
+  standardStyle: {
+    display: 'flex',
+    margin: '5px',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '50vw',
+    borderStyle: 'solid',
+    borderWidth: '2px',
+    borderRadius: '5px',
+    borderColor: '#95a5a6',
+    color: '#ecf0f1',
+  },
+  menuStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '5%',
+  },
+  titleStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '20px',
+    fontWeight: 'bold',
+  },
+  buttonOrganization: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  }
+});

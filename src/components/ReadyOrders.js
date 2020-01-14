@@ -13,7 +13,8 @@ const ReadyOrders = (props) => {
   };
 
   return (
-    <div>
+    <div className={css(styles.standardStyle)}>
+      <h4 className={css(styles.titleStyle)}>HISTÓRICO DE PEDIDOS</h4>
       <section>
         {readyOrders.map((ready) => (
           <div key={ready.id}>
@@ -34,3 +35,28 @@ const ReadyOrders = (props) => {
 };
 
 export default ReadyOrders;
+
+const styles = StyleSheet.create({
+  standardStyle: {
+    display: 'flex',
+    margin: '20px 5px 0px 5px',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '50vw',
+    borderStyle: 'solid',
+    borderWidth: '2px',
+    borderRadius: '5px',
+    borderColor: '#95a5a6',
+    color: '#ecf0f1',
+  },
+  titleStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '20px',
+    fontWeight: 'bold',
+  },
+})
