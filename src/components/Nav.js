@@ -30,6 +30,6 @@ const Nav = () => {
         className={css(styles.colorNav)}>COZINHA</Link>
     </nav>
   );
-}
+};
 
 export default Nav;
