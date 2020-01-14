@@ -1,5 +1,21 @@
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite/no-important';
+
+const styles = StyleSheet.create({
+  optionsStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontSize: '18px',
+    backgroundColor: '#e67e22',
+    borderColor: '#000000',
+    borderRadius: 5,
+    width: '20vw',
+    height: '5vw',
+    margin: 3,
+  }
+});
 
 const ClickableSection = (props) => {
   return (
@@ -11,19 +27,3 @@ const ClickableSection = (props) => {
 }
 
 export default ClickableSection;
-
-const styles = StyleSheet.create({
-  optionsStyle: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    fontSize: '18px',
-    backgroundColor: '#d35400',
-    borderColor: '#000000',
-    borderRadius: '5px',
-    width: '20vw',
-    height: '5vw',
-    margin: '3px',
-  },
-});

@@ -1,5 +1,59 @@
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite/no-important';
+
+const styles = StyleSheet.create({
+  standardStyle: {
+    display: 'flex',
+    margin: '20px 5px 0px 5px',
+    justifyContent: 'start',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '50vw',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#95a5a6',
+    color: '#ecf0f1',
+  },
+  titleStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '20px',
+    fontWeight: 'bold',
+  },
+  historicList: {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    color: '#ecf0f1',
+    width: 350,
+    borderBottom: 'solid',
+    borderColor: '#bdc3c7',
+    borderWidth: 1.5,
+    marginBottom: 20,
+    padding: '10px 15px',
+    boxSizing: 'border-box',
+  },
+  timeStyle: {
+    textAlign: 'right',
+    fontWeight: 'bold',
+    color: '#f1c40f',
+  },
+  itemStyle: {
+    margin: '2px 0px 0px 0px',
+  },
+  itensList: {
+    marginTop: 0,
+    textAlign: 'left',
+  },
+  clientInfo: {
+    fontWeight: 'bold',
+    marginTop: 5,
+  }
+});
 
 const ReadyOrders = (props) => {
   const readyOrders = props.readyOrders;
@@ -17,16 +71,14 @@ const ReadyOrders = (props) => {
       <h4 className={css(styles.titleStyle)}>HISTÓRICO DE PEDIDOS</h4>
       <section>
         {readyOrders.map((ready) => (
-          <div key={ready.id}>
-            <p>Tempo gasto: {leadTime(new Date(ready.readyTime), new Date(ready.dispatchTime))}</p>
-            <p>Cliente: {ready.clientName}</p>
-            <p>Nº da Mesa: {ready.table}</p>
-            <p>Pedido:</p>
-            <p>
+          <div className={css(styles.historicList)} key={ready.id}>
+            <span className={css(styles.timeStyle)}>{leadTime(new Date(ready.readyTime), new Date(ready.dispatchTime))}</span>
+            <span className={css(styles.clientInfo)}>{ready.clientName} • {ready.table}</span>
+            <span className={css(styles.itensList)}><strong>Pedido</strong>
               {ready.clientOrder.map((selectedItens) => (
-                <p>{selectedItens.count} x {selectedItens.name} </p>
+                <p className={css(styles.itemStyle)}>{selectedItens.count} x {selectedItens.name} </p>
               ))}
-            </p>
+            </span>
           </div>
         ))}
       </section>
@@ -35,28 +87,3 @@ const ReadyOrders = (props) => {
 };
 
 export default ReadyOrders;
-
-const styles = StyleSheet.create({
-  standardStyle: {
-    display: 'flex',
-    margin: '20px 5px 0px 5px',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '50vw',
-    borderStyle: 'solid',
-    borderWidth: '2px',
-    borderRadius: '5px',
-    borderColor: '#95a5a6',
-    color: '#ecf0f1',
-  },
-  titleStyle: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '20px',
-    fontWeight: 'bold',
-  },
-})

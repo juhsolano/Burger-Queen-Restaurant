@@ -3,10 +3,45 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite/no-important';
 import AdditionalOptions from '../components/AdditionalOptions';
 import alertify from 'alertifyjs';
 
+const styles = StyleSheet.create({
+  loungeStandard: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  inputStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: 5,
+    marginTop: '4%',
+    marginBottom: '1%',
+  },
+  inputName: {
+    display: 'flex',
+    fontSize: 16,
+    padding: 5,
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderRadius: 5,
+    height: '4vw',
+    margin: 1.5,
+    width: '35%',
+  },
+  inputNumber: {
+    display: 'flex',
+    fontSize: 16,
+    padding: 5,
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderRadius: 5,
+    height: '4vw',
+    margin: 1.5,
+    width: '12%',
+  }
+});
 
 const Lounge = () => {
 
@@ -157,42 +192,3 @@ const Lounge = () => {
 }
 
 export default Lounge;
-
-const styles = StyleSheet.create({
-  loungeStandard: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-  inputStyle: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginRight: '5px',
-    marginTop: '4%',
-    marginBottom: '1%',
-  },
-  inputName: {
-    display: 'flex',
-    fontSize: '16px',
-    padding: '5px',
-    backgroundColor: '##ecf0f1',
-    borderColor: '#95a5a6',
-    borderStyle: 'groove',
-    borderRadius: '5px',
-    height: '4vw',
-    margin: '1.5px',
-    width: '35%',
-  },
-  inputNumber: {
-    display: 'flex',
-    fontSize: '16px',
-    padding: '5px',
-    backgroundColor: '##ecf0f1',
-    borderColor: '#95a5a6',
-    borderStyle: 'groove',
-    borderRadius: '5px',
-    height: '4vw',
-    margin: '1.5px',
-    width: '12%',
-  },
-});
-

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite/no-important';
 
 const styles = StyleSheet.create({
   navStyle: {
@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
   },
   colorNav: {
     backgroundColor: '#2c3e50',
-    fontSize: '30px',
+    fontSize: 30,
     fontWeight: 'bold',
     boxShadow: '0px 3px 10px 2px #1e272e',
     color: '#27ae60',
-    padding: '10px',
+    padding: 10,
     width: '100%',
     textDecorationLine: 'none',
   }

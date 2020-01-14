@@ -2,6 +2,60 @@ import React from 'react';
 import Button from './Button';
 import { StyleSheet, css } from 'aphrodite/no-important';
 
+const styles = StyleSheet.create({
+  standardStyle: {
+    display: 'flex',
+    margin: '20px 5px 0px 5px',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    justifyContent: 'start',
+    alignItems: 'center',
+    alignContent: 'space-around',
+    width: '50vw',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 5,
+    borderColor: '#95a5a6',
+    color: '#ecf0f1'
+  },
+  titleStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  forwardedStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#bdc3c7',
+    textAlign: 'center',
+    color: '#000000',
+    width: '350px',
+    boxShadow: '0px 3px 15px 0px rgba(0, 0, 0, 0.79)',
+    borderRadius: 20,
+    marginBottom: 20,
+    padding: '20px 25px',
+    boxSizing: 'border-box',
+  },
+  orderList: {
+    textAlign: 'left',
+  },
+  changeButton: {
+    display: 'inline-flex',
+    justifyContent: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#ecf0f1',
+    backgroundColor: '#27ae60',
+    borderColor: '#000000',
+    borderRadius: 5,
+    marginTop: 20,
+    height: '5vw',
+  }
+});
 
 const Forwarded = (props) => {
   const forwarded = props.forwarded;
@@ -35,60 +89,3 @@ const Forwarded = (props) => {
 
 export default Forwarded;
 
-const styles = StyleSheet.create({
-  standardStyle: {
-    display: 'flex',
-    margin: '20px 5px 0px 5px',
-    flexDirection: 'column',//testar 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'start',
-    alignItems: 'center',
-    alignContent: 'space-around',
-    width: '50vw',
-    borderStyle: 'solid',
-    borderWidth: '2px',
-    borderRadius: '5px',
-    borderColor: '#95a5a6',
-    color: '#ecf0f1'
-  },
-  titleStyle: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '20px',
-    fontWeight: 'bold',
-  },
-  forwardedStyle: {
-    display: 'flex',
-    flexDirection: 'column',
-    background: '#bdc3c7',
-    textAlign: 'center',
-    color: '#000000',
-    width: '350px',
-    boxShadow: '0px 3px 15px 0px rgba(0, 0, 0, 0.79)',
-    borderRadius: 20,
-    marginBottom: 20,
-    padding: '20px 25px',
-    boxSizing: 'border-box',
-  },
-  orderList: {
-    textAlign: 'left',
-  },
-  changeButton: {
-    display: 'inline-flex',
-    justifyContent: 'center',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    color: '#ecf0f1',
-    backgroundColor: '#27ae60',
-    borderColor: '#000000',
-    borderRadius: '5px',
-    marginTop: 20,
-    height: '5vw',
-  },
-
-});
-
-//<p>{new Date(individualOrder.dispatchTime).toLocaleTimeString('pt-BR')}</p>
