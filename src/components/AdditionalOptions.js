@@ -31,7 +31,7 @@ const AdditionalOptions = (props) => {
 
   const handleOk = () => {
     onClose(value);
-  }
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -90,6 +90,6 @@ const AdditionalOptions = (props) => {
       </Dialog>
     </List>
   );
-}
+};
 
 export default AdditionalOptions;
