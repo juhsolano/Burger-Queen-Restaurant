@@ -29,10 +29,6 @@ const AdditionalOptions = (props) => {
     }
   };
 
-  const handleCancel = () => {
-    onClose();
-  };
-
   const handleOk = () => {
     onClose(value);
   }
@@ -45,18 +41,10 @@ const AdditionalOptions = (props) => {
   const handleChecked = name => event => {
     if (event.target.checked) {
       props.setExtra(name)
+    } else {
+      props.setExtra({})
     }
   };
-
-  // const handleChecked = name => event => {
-  //   if (event.target.checked) {
-  //     props.setExtra(name)
-  //   } else if (!name.contains(event.target.checked)) {
-  //     props.setExtra(name)
-  //   }
-  //   console.log(name)
-  //   console.log(props.extra)
-  // };
 
   return (
     <List component='div' role='list'>
@@ -96,7 +84,7 @@ const AdditionalOptions = (props) => {
           </FormGroup>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleCancel} color='primary'>Cancelar</Button>
+          <Button autoFocus onClick={props.onCancel} color='primary'>Cancelar</Button>
           <Button onClick={handleOk} color='primary'>Ok</Button>
         </DialogActions>
       </Dialog>

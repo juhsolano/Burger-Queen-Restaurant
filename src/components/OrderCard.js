@@ -1,57 +1,69 @@
 import React from 'react';
 import Button from '../components/Button';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite/no-important';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const styles = StyleSheet.create({
   standardStyle: {
-    margin: '5px',
-    padding: '10px',
+    margin: 5,
+    padding: 10,
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
     verticalAlign: 'middle',
     width: '50vw',
     borderStyle: 'solid',
-    borderWidth: '2px',
-    borderRadius: '5px',
+    borderWidth: 2,
+    borderRadius: 5,
     borderColor: '#95a5a6',
     color: '#ecf0f1',
-    fontSize: '20px',
+    fontSize: 20,
   },
   orderCardStyle: {
     display: 'flex',
     justifyContent: 'space-around',
+    alignItems: 'center',
   },
   buttonStyle: {
     display: 'flex',
-    margin: '3px',
+    margin: 3,
     color: '#000000',
     borderRadius: '100px',
-    padding: '20px',
-    // textAlign: 'center',
-    fontSize: '20px',
-    // display: 'inline - block',
+    padding: 18,
+    textAlign: 'center',
+    fontSize: 25,
     width: '5vw',
     height: '5vw'
   },
   orderButton: {
-    justifyContent: 'space-evenly',
-    fontSize: '14px',
-    backgroundColor: '#2ecc71',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#ecf0f1',
+    backgroundColor: '#27ae60',
     borderColor: '#000000',
-    borderStyle: 'groove',
-    borderRadius: '5px',
+    borderRadius: 5,
     width: '20vw',
     height: '5vw',
-    margin: '1.5px',
   },
   totalStyle: {
     borderTopStyle: 'solid',
-    borderWidth: '0.5px',
+    borderWidth: 0.5,
     borderColor: '#ecf0f1',
+  },
+  itemStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'space-between',
+    width: '60%',
+  },
+  countStyle: {
+    marginRight: 10,
+  },
+  priceStyle: {
+    marginLeft: 25,
+    width: '30%',
   }
 });
 
@@ -70,19 +82,21 @@ const OrderCard = (props) => {
                   e.preventDefault();
                   props.reduceItem(element);
                 }}
-                title={<FontAwesomeIcon icon={faMinus} size="xs" />}
+                title={<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}
               />
             </div>
-            <div>{element.count}</div>
-            <div>{element.name}</div>
-            <div>R${element.price},00</div>
+            <div className={css(styles.itemStyle)}>
+              <div className={css(styles.countStyle)}>{element.count} x</div>
+              <div className={css(styles.nameStyle)}>{element.name}</div>
+              <div className={css(styles.priceStyle)}>R${element.price},00</div>
+            </div>
             <div>
               <Button className={css(styles.buttonStyle)}
                 handleClick={(e) => {
                   e.preventDefault();
                   props.removeOrder(element);
                 }}
-                title={<FontAwesomeIcon icon={faTrash} size="xs" />}
+                title={<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}
               />
             </div>
           </div>

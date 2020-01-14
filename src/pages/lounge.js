@@ -3,7 +3,7 @@ import firebaseApp from '../utils/firebaseUtils';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite/no-important';
 import AdditionalOptions from '../components/AdditionalOptions';
 import alertify from 'alertifyjs';
 
@@ -11,6 +11,35 @@ const styles = StyleSheet.create({
   loungeStandard: {
     display: 'flex',
     justifyContent: 'space-around',
+  },
+  inputStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: 5,
+    marginTop: '4%',
+    marginBottom: '1%',
+  },
+  inputName: {
+    display: 'flex',
+    fontSize: 16,
+    padding: 5,
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderRadius: 5,
+    height: '4vw',
+    margin: 1.5,
+    width: '35%',
+  },
+  inputNumber: {
+    display: 'flex',
+    fontSize: 16,
+    padding: 5,
+    backgroundColor: '##ecf0f1',
+    borderColor: '#95a5a6',
+    borderRadius: 5,
+    height: '4vw',
+    margin: 1.5,
+    width: '12%',
   }
 });
 
@@ -22,7 +51,7 @@ const Lounge = () => {
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
   const [open, setOpen] = useState(false);
-  const [value] = useState('');
+  const [value] = useState('carne bovina');
   const [burger, setBurger] = useState([]);
   const [option, setOption] = useState({});
   const [extra, setExtra] = useState({});
@@ -53,8 +82,8 @@ const Lounge = () => {
           table: table,
           clientOrder: order,
           bill: total,
-          dispatchTime: new Date().toLocaleString('pt-BR'),
-          status: 'Encaminhado',
+          dispatchTime: new Date().getTime(),
+          status: 'A preparar',
         })
         .then(() => {
           alertify.success('Pedido encaminhado com sucesso!');
@@ -77,15 +106,16 @@ const Lounge = () => {
   };
 
   const handleClose = (selectOption) => {
-    console.log(extra.extra)
+    if (extra.extra === undefined) {
+      extra.extra = '';
+    }
     const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption + ' ' + extra.extra);
     if (itemIndex === -1) {
       option.count = 1;
-      if (Object.keys(extra).length !== 0) {
-        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }])
-        console.log(selectOption)
+      if (Object.keys(extra).length !== 0 && extra.extra !== '') {
+        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }]);
       } else {
-        setOrder([...order, { ...option, name: option.name + ' ' + selectOption }])
+        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra }])
       }
     } else {
       order[itemIndex].count += 1;
@@ -129,9 +159,9 @@ const Lounge = () => {
 
   return (
     <div>
-      <div>
-        <Input type='text' value={client} placeholder='Nome cliente' handleChange={event => setClient(event.currentTarget.value)} />
-        <Input type='number' value={table} placeholder='Nº de Mesa' handleChange={event => setTable(event.currentTarget.value)} />
+      <div className={css(styles.inputStyle)}>
+        <Input className={css(styles.inputName)} type='text' value={client} placeholder='Nome do cliente' handleChange={event => setClient(event.currentTarget.value)} />
+        <Input className={css(styles.inputNumber)} type='number' value={table} placeholder='Nº da Mesa' handleChange={event => setTable(event.currentTarget.value)} />
       </div>
       <div className={css(styles.loungeStandard)}>
         <OptionsCard
@@ -148,13 +178,13 @@ const Lounge = () => {
         />
         <AdditionalOptions
           id='burger-options-extras'
-          keepMounted
           open={open}
           onClose={handleClose}
           value={value}
           burger={burger}
           extra={extra}
           setExtra={setExtra}
+          onCancel={() => setOpen(false)}
         />
       </div>
     </div>
