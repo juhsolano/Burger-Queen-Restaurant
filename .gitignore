@@ -24,4 +24,4 @@ yarn-error.log*
 
 /utils
 
-.firebase
+# .firebase
