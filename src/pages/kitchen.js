@@ -28,7 +28,7 @@ const Kitchen = () => {
         setForwarded(data.filter((forwardedItens) => forwardedItens.status === 'A preparar'));
         setReadyOrders(data.filter((readyItens) => readyItens.status === 'Pronto para entrega'));
       })
-  }, [])
+  }, []);
 
   const changeStatus = (orderItem) => {
     firebaseApp.collection('order')
