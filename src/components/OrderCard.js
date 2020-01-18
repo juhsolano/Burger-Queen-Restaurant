@@ -28,14 +28,12 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     display: 'flex',
-    margin: 3,
+    margin: 10,
     color: '#000000',
     borderRadius: '100px',
     padding: 18,
     textAlign: 'center',
     fontSize: 25,
-    width: '5vw',
-    height: '5vw'
   },
   orderButton: {
     fontSize: 16,
@@ -81,9 +79,7 @@ const OrderCard = (props) => {
                 handleClick={(e) => {
                   e.preventDefault();
                   props.reduceItem(element);
-                }}
-                title={<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}
-              />
+                }}>{<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}</Button>
             </div>
             <div className={css(styles.itemStyle)}>
               <div className={css(styles.countStyle)}>{element.count} x</div>
@@ -95,9 +91,7 @@ const OrderCard = (props) => {
                 handleClick={(e) => {
                   e.preventDefault();
                   props.removeOrder(element);
-                }}
-                title={<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}
-              />
+                }}>{<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}</Button>
             </div>
           </div>
         ))}
@@ -108,8 +102,7 @@ const OrderCard = (props) => {
           handleClick={(e) => {
             e.preventDefault();
             props.submitOrder();
-          }}
-          title='ENVIAR PEDIDO' />
+          }}>{'ENVIAR PEDIDO'}</Button>
       </section>
     </div>
   );

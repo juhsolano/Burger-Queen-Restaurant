@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     marginTop: '4%',
     marginBottom: '1%',
   },
-  inputName: {
+  commonInput: {
     display: 'flex',
     fontSize: 16,
     padding: 5,
@@ -31,14 +31,6 @@ const styles = StyleSheet.create({
     width: '35%',
   },
   inputNumber: {
-    display: 'flex',
-    fontSize: 16,
-    padding: 5,
-    backgroundColor: '##ecf0f1',
-    borderColor: '#95a5a6',
-    borderRadius: 5,
-    height: '4vw',
-    margin: 1.5,
     width: '12%',
   }
 });
@@ -60,19 +52,14 @@ const Lounge = () => {
     firebaseApp.collection('menu')
       .get()
       .then((snapshot) => {
-        const breakfastFood = snapshot.docs.filter(docs => docs.data().breakfast).map((doc) => ({
-          id: doc.id,
-          ...doc.data()
+        const dataMenu = snapshot.docs.map((menuItens) => ({
+          id: menuItens.id,
+          ...menuItens.data()
         }))
-        setBreakfastMenu(breakfastFood);
-
-        const lunchFood = snapshot.docs.filter(doc => doc.data().lunch).map((doc) => ({
-          id: doc.id,
-          ...doc.data()
-        }))
-        setLunchMenu(lunchFood);
+        setBreakfastMenu(dataMenu.filter((breakfastFood) => breakfastFood.breakfast === true));
+        setLunchMenu(dataMenu.filter((lunchFood) => lunchFood.lunch === true));
       })
-  }, [])
+  }, []);
 
   const submitOrder = () => {
     if (order.length && client && table) {
@@ -91,12 +78,8 @@ const Lounge = () => {
           setTable(['']);
           setOrder([]);
         })
-    } else if (!order.length) {
-      alertify.error('Selecione ao menos um item');
-    } else if (!client) {
-      alertify.error('Informe o nome do cliente');
-    } else if (!table) {
-      alertify.error('Informe o nº da mesa');
+    } else {
+      alertify.error('Selecione ao menos um item e identifique o cliente com nº mesa');
     }
   };
 
@@ -109,13 +92,14 @@ const Lounge = () => {
     if (extra.extra === undefined) {
       extra.extra = '';
     }
-    const itemIndex = order.findIndex(orderItem => orderItem.name === option.name + ' ' + selectOption + ' ' + extra.extra);
+    const optionName = option.name + ' ' + selectOption + ' ' + extra.extra;
+    const itemIndex = order.findIndex(orderItem => orderItem.name === optionName);
     if (itemIndex === -1) {
       option.count = 1;
       if (Object.keys(extra).length !== 0 && extra.extra !== '') {
-        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra, price: option.price + 1 }]);
+        setOrder([...order, { ...option, name: optionName, price: option.price + 1 }]);
       } else {
-        setOrder([...order, { ...option, name: option.name + ' ' + selectOption + ' ' + extra.extra }])
+        setOrder([...order, { ...option, name: optionName }])
       }
     } else {
       order[itemIndex].count += 1;
@@ -150,9 +134,7 @@ const Lounge = () => {
   };
 
   const removeOrder = (item) => {
-    const deleteItem = (order.indexOf(item));
-    order.splice(deleteItem, 1);
-    setOrder([...order]);
+    setOrder(order.filter(product => product.name !== item.name))
   };
 
   const total = order.reduce((acc, item) => acc + (item.count * item.price), 0);
@@ -160,8 +142,8 @@ const Lounge = () => {
   return (
     <div>
       <div className={css(styles.inputStyle)}>
-        <Input className={css(styles.inputName)} type='text' value={client} placeholder='Nome do cliente' handleChange={event => setClient(event.currentTarget.value)} />
-        <Input className={css(styles.inputNumber)} type='number' value={table} placeholder='Nº da Mesa' handleChange={event => setTable(event.currentTarget.value)} />
+        <Input className={css(styles.commonInput)} type='text' value={client} placeholder='Nome do cliente' handleChange={event => setClient(event.currentTarget.value)} />
+        <Input className={css(styles.commonInput, styles.inputNumber)} type='number' value={table} placeholder='Nº da Mesa' handleChange={event => setTable(event.currentTarget.value)} />
       </div>
       <div className={css(styles.loungeStandard)}>
         <OptionsCard
@@ -189,6 +171,6 @@ const Lounge = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Lounge;

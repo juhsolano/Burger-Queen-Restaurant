@@ -21,17 +21,12 @@ const Kitchen = () => {
       .collection('order')
       .orderBy('dispatchTime', 'asc')
       .onSnapshot((snapshot) => {
-        const request = snapshot.docs.map((ord) => ({
+        const data = snapshot.docs.map((ord) => ({
           id: ord.id,
           ...ord.data()
         }))
-        setForwarded(request.filter((forwardedItens) => forwardedItens.status === 'A preparar'));
-
-        const final = snapshot.docs.map((ord) => ({
-          id: ord.id,
-          ...ord.data()
-        }))
-        setReadyOrders(final.filter((readyItens) => readyItens.status === 'Pronto para entrega'));
+        setForwarded(data.filter((forwardedItens) => forwardedItens.status === 'A preparar'));
+        setReadyOrders(data.filter((readyItens) => readyItens.status === 'Pronto para entrega'));
       })
   }, [])
 
@@ -42,7 +37,7 @@ const Kitchen = () => {
         status: 'Pronto para entrega',
         readyTime: new Date().getTime(),
         deliverOrder: 'A entregar',
-      })
+      });
   };
 
   return (
