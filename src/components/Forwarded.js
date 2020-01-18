@@ -78,8 +78,7 @@ const Forwarded = (props) => {
               handleClick={(e) => {
                 e.preventDefault();
                 props.changeStatus(individualOrder);
-              }}
-              title='PREPARADO' />
+              }}>{'PREPARADO'}</Button>
           </div>
         ))}
       </section>
