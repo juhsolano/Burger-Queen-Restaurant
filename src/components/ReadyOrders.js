@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 2,
     borderRadius: 5,
-    borderColor: '#95a5a6',
+    borderColor: '#A67314',
     color: '#ecf0f1',
   },
   titleStyle: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: '#ecf0f1',
     width: 350,
     borderBottom: 'solid',
-    borderColor: '#bdc3c7',
+    borderColor: '#A67314',
     borderWidth: 1.5,
     marginBottom: 20,
     padding: '10px 15px',

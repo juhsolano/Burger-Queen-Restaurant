@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 2,
     borderRadius: 5,
-    borderColor: '#95a5a6',
+    borderColor: '#A67314',
     color: '#ecf0f1'
   },
   titleStyle: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     background: '#bdc3c7',
     textAlign: 'center',
-    color: '#000000',
+    color: '#011140',
     width: '350px',
     boxShadow: '0px 3px 15px 0px rgba(0, 0, 0, 0.79)',
     borderRadius: 20,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ecf0f1',
-    backgroundColor: '#27ae60',
+    backgroundColor: '#732D14',
     borderColor: '#000000',
     borderRadius: 5,
     marginTop: 20,
