@@ -11,13 +11,14 @@ const styles = StyleSheet.create({
     padding: 10,
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'start',
     textAlign: 'center',
     verticalAlign: 'middle',
     width: '50vw',
     borderStyle: 'solid',
     borderWidth: 2,
     borderRadius: 5,
-    borderColor: '#95a5a6',
+    borderColor: '#A67314',
     color: '#ecf0f1',
     fontSize: 20,
   },
@@ -29,7 +30,9 @@ const styles = StyleSheet.create({
   buttonStyle: {
     display: 'flex',
     margin: 10,
-    color: '#000000',
+    backgroundColor: '#BFAA82',
+    boxShadow: '0.8px 1.2px 1.2px 0.8px #40392B',
+    borderColor: '#BFAA82',
     borderRadius: '100px',
     padding: 18,
     textAlign: 'center',
@@ -38,9 +41,10 @@ const styles = StyleSheet.create({
   orderButton: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#ecf0f1',
-    backgroundColor: '#27ae60',
-    borderColor: '#000000',
+    color: '#011140',
+    backgroundColor: '#9EA626',
+    borderColor: '#011140',
+    boxShadow: '0.5px 1px 1px 0.5px #2E6EA6',
     borderRadius: 5,
     width: '20vw',
     height: '5vw',
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
   totalStyle: {
     borderTopStyle: 'solid',
     borderWidth: 0.5,
-    borderColor: '#ecf0f1',
+    borderColor: '#A67314',
   },
   itemStyle: {
     display: 'flex',
@@ -79,7 +83,7 @@ const OrderCard = (props) => {
                 handleClick={(e) => {
                   e.preventDefault();
                   props.reduceItem(element);
-                }}>{<FontAwesomeIcon icon={faMinus} size="xs" color='#c0392b' />}</Button>
+                }}>{<FontAwesomeIcon icon={faMinus} size="xs" color='#732D14' />}</Button>
             </div>
             <div className={css(styles.itemStyle)}>
               <div className={css(styles.countStyle)}>{element.count} x</div>
@@ -91,7 +95,7 @@ const OrderCard = (props) => {
                 handleClick={(e) => {
                   e.preventDefault();
                   props.removeOrder(element);
-                }}>{<FontAwesomeIcon icon={faTrash} size="xs" color='#c0392b' />}</Button>
+                }}>{<FontAwesomeIcon icon={faTrash} size="xs" color='#732D14' />}</Button>
             </div>
           </div>
         ))}

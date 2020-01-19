@@ -6,15 +6,15 @@ import {
 } from "react-router-dom";
 import Lounge from './pages/lounge';
 import Kitchen from './pages/kitchen';
-import Nav from './components/Nav';
+import Main from './pages/main';
 
 const App = () => {
   return (
     <Router>
-      <Nav />
       <Switch>
-        <Route exact path="/lounge" component={Lounge} />
-        <Route path="/kitchen" component={Kitchen} />
+        <Route exact path='/lounge' component={Lounge} />
+        <Route path='/kitchen' component={Kitchen} />
+        <Route path='/' component={Main} />
       </Switch>
     </Router>);
 };

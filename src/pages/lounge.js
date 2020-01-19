@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebaseApp from '../utils/firebaseUtils';
+import Header from '../components/Header';
 import Input from '../components/Input';
 import OptionsCard from '../components/OptionsCard';
 import OrderCard from '../components/OrderCard';
@@ -141,6 +142,7 @@ const Lounge = () => {
 
   return (
     <div>
+      <Header />
       <div className={css(styles.inputStyle)}>
         <Input className={css(styles.commonInput)} type='text' value={client} placeholder='Nome do cliente' handleChange={event => setClient(event.currentTarget.value)} />
         <Input className={css(styles.commonInput, styles.inputNumber)} type='number' value={table} placeholder='Nº da Mesa' handleChange={event => setTable(event.currentTarget.value)} />

@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import firebaseApp from '../utils/firebaseUtils';
 import { StyleSheet, css } from 'aphrodite/no-important';
+import Header from '../components/Header';
 import Forwarded from '../components/Forwarded';
 import ReadyOrders from '../components/ReadyOrders';
 
@@ -41,14 +42,17 @@ const Kitchen = () => {
   };
 
   return (
-    <div className={css(styles.kitchenStyle)}>
-      <Forwarded
-        forwarded={forwarded}
-        changeStatus={changeStatus}
-      />
-      <ReadyOrders
-        readyOrders={readyOrders}
-      />
+    <div>
+      <Header />
+      <div className={css(styles.kitchenStyle)}>
+        <Forwarded
+          forwarded={forwarded}
+          changeStatus={changeStatus}
+        />
+        <ReadyOrders
+          readyOrders={readyOrders}
+        />
+      </div>
     </div>
   );
 };
