@@ -10,39 +10,50 @@
 ***
 ## 1. Resumo do Projeto
 
-Um pequeno restaurante de hambúrgueres, que está crescendo, necessita uma interface em que se possa realizar pedidos utilizando um tablet, e enviá-los para a cozinha para que sejam preparados de forma ordenada e eficiente.
+"God Save the Queen - Burger & Beer" é um pequeno restaurante de hambúrgueres que está crescendo e necessita uma interface em que se possa realizar pedidos utilizando um tablet, e enviá-los para a cozinha para que sejam preparados de forma ordenada e eficiente.
 
-O projeto consiste em uma interface a ser utilizada pelo garçom, em que todos os produtos oferecidos pelo estabelecimento ficam disponíveis, separados em duas categorias "café da manhã" e "almoço e janta" (Figuras 1 e 2). 
+O projeto consiste em uma interface a ser utilizada pelo garçom, em que todos os produtos oferecidos pelo estabelecimento ficam disponíveis, separados em duas categorias "café da manhã" e "almoço e janta". 
 A medida que os clientes realizam os pedidos o garçom consegue adicionar e retirar itens da lista, obtendo ao final um resumo do pedido com o preço da conta final já calculado. 
+
+### Paleta de Cores
+
+A paleta de cores utilizada foi inspirada nas cores da Boréale’s polar bear, indústria canadense de cerveja. 
+
+![color_pallet](src/img/color_pallet.png)
 
 ***
 
 ### 2. Como Usar
 
+**Interface Inicial do Aplicativo**
+![initial](src/img/initial.png)
+
+**Figura 1.** Interface inicial de entrada do aplicativo.
+
 **Interface do Salão**
 
 ![lounge_options_extras](src/img/lounge_options_extras.png)
 
-![lounge](src/img/lounge.png)
-
-**Figura 1.** Interface utilizada pelo garçom para realizar os pedidos, incluido resumo com total da conta.
+**Figura 2.** Interface utilizada pelo garçom para realizar os pedidos, incluido resumo com total da conta.
 
 Paralelamente a equipe da cozinha recebe os pedidos a serem preparados, podendo encaminhá-lo de volta para que o garçom saiba quando realizar a entrega e, tendo acesso ao histórico de pedidos realizados.
 
 **Interface da Cozinha**
 
 ![kitchen](src/img/kitchen.png)
-**Figura 2.** Interface visualizada pela equipe da cozinha, com histórico de pedidos e opção de marcar os pedidos como "preparados".
+**Figura 3.** Interface visualizada pela equipe da cozinha, com histórico de pedidos e opção de marcar os pedidos como "preparados".
 
 ***
-## 3. Tecnologias Envolvidas
+## 3. Tecnologias e Ferramentas Envolvidas
 
-    * HTML5
-	* JavasScript (ES6)
-	* Aphrodite (CSS)
-	* React Hooks
-	* Firebase
-    * alertifyjs
-    * @material-ui
-	* @fortawesome/react-fontawesome
+* HTML5
+* JavaScript (ES6)
+* Aphrodite (CSS)
+* React Hooks
+* Firebase
+* alertifyjs
+* @material-ui
+* fortawesome/react-fontawesome
+* Trello
+
 ***
