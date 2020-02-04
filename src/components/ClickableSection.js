@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    fontSize: '18px',
+    fontSize: 17,
     backgroundColor: '#732D14',
     boxShadow: '0px 0.5px 1.5px 0.5px #A67314',
     fontWeight: 'bold',
@@ -16,17 +16,18 @@ const styles = StyleSheet.create({
     width: '20vw',
     height: '5vw',
     margin: 3,
-    padding: '15px 0px 15px 0px',
+    padding: '5px 0px',
   }
 });
 
 const ClickableSection = (props) => {
   return (
     <button className={css(styles.optionsStyle)} onClick={props.handleClick} key={props.id}>
-      <span className={css(styles.itensName)}>{props.name}</span>
-      <span className={css(styles.itensName)}>R${props.price},00</span>
+      <span>{props.name}</span>
+      <span>R${props.price},00</span>
     </button>
   );
 };
 
 export default ClickableSection;
+

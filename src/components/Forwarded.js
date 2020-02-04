@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   changeButton: {
     display: 'inline-flex',
     justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ecf0f1',
@@ -74,7 +75,7 @@ const Forwarded = (props) => {
             </div>
             <Button
               id={individualOrder.id}
-              className={css(styles.changeButton)}
+              className={css(styles.changeButton, styles.moz)}
               handleClick={(e) => {
                 e.preventDefault();
                 props.changeStatus(individualOrder);
